@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TaskNEarn Pro</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>body { user-select: none; -webkit-user-select: none; background-color: #FFFFFF; }</style>
+</head>
+<body class="text-slate-800 font-sans min-h-screen pb-24 bg-white">
+
+    <div class="max-w-md mx-auto min-h-screen flex flex-col justify-between p-4 relative bg-white">
+        
+        <header class="w-full grid grid-cols-3 items-center bg-slate-50 border border-slate-200 rounded-2xl p-4 mb-4 sticky top-2 z-50 shadow-sm">
+            <div class="flex items-center space-x-2 justify-self-start">
+                <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-indigo-500 to-violet-600 flex items-center justify-center font-black text-xs text-white shadow-sm" id="user-avatar">T</div>
+                <div class="text-xs font-bold text-slate-900 truncate max-w-[70px]" id="user-name">xyz</div>
+            </div>
+            <div class="text-center justify-self-center">
+                <span class="text-sm font-black text-indigo-600 tracking-tight uppercase">TaskNEarn</span>
+            </div>
+            <div class="bg-white border border-slate-200 px-2.5 py-1.5 rounded-xl flex items-center space-x-1.5 shadow-sm justify-self-end">
+                <span class="text-amber-500 text-xs animate-bounce">🪙</span>
+                <span id="display-points" class="text-xs font-black text-slate-900 tracking-wide">0</span>
+                <span class="text-[9px] font-bold text-slate-400 uppercase">Pts</span>
+            </div>
+        </header>
+
+        <main class="flex-1 w-full bg-white">
+            <div id="screen-home" class="space-y-4 bg-white">
+                <div class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-3.5 shadow-sm">
+                    <div class="flex justify-between items-center">
+                        <div class="space-y-0.5">
+                            <span class="text-[10px] text-indigo-600 font-black uppercase tracking-wider block" id="label-current-week">Week 1 Progression</span>
+                            <h3 class="font-bold text-xs text-slate-700 flex items-center">7-Day Streak Tracker <span class="ml-1 text-xs">🎁</span></h3>
+                        </div>
+                        <span id="streak-counter-tag" class="text-[10px] font-black bg-indigo-50 border border-indigo-100 text-indigo-600 px-2.5 py-1 rounded-md">Day 1 / 7</span>
+                    </div>
+                    <div class="grid grid-cols-7 gap-2" id="streak-grid-row"></div>
+                    <div class="w-full bg-white rounded-xl p-2.5 text-center border border-slate-200/60">
+                        <p id="streak-hint-text" class="text-[10px] text-slate-500 font-medium">Clear today's 20 tasks completely to advance your streak calendar.</p>
+                    </div>
+                </div>
+
+                <div class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-4 shadow-sm relative overflow-hidden">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span id="active-task-idx-badge" class="text-[10px] bg-indigo-600 text-white font-black px-2 py-0.5 rounded uppercase tracking-wider">1st Task</span>
+                            <h2 class="font-black text-sm text-slate-900 mt-1.5 tracking-tight">Easy Offers</h2>
+                        </div>
+                        <div class="text-right">
+                            <span id="active-task-points-value" class="text-sm font-black text-emerald-600 block">+100 Pts</span>
+                            <span id="active-task-multiplier" class="text-[9px] font-bold text-slate-400 uppercase block">(1x Multiplier)</span>
+                        </div>
+                    </div>
+
+                    <div id="action-terminal-block" class="pt-2">
+                        <button id="btn-redirect-gplinks" onclick="executeTaskRedirect()" class="w-full bg-gradient-to-r from-indigo-500 to-violet-600 text-white font-black text-xs py-3.5 rounded-xl uppercase tracking-wider shadow-md cursor-pointer">
+                            Read for 5 Minutes
+                        </button>
+                        <div id="timer-lock-block" class="hidden w-full bg-white border border-slate-200 rounded-xl p-3 text-center space-y-1.5 shadow-inner">
+                            <span class="text-[10px] text-slate-400 uppercase tracking-widest font-bold block">Verification Lock Active</span>
+                            <div id="countdown-clock" class="text-xl font-black text-indigo-600 font-mono tracking-wider">05:00</div>
+                            <span class="text-[9px] text-slate-500 block">Complete the GPLinks article adblock and wait for the timer to finish.</span>
+                        </div>
+                        <button id="btn-claim-points" onclick="processPointsClaimHandshake()" class="hidden w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-black text-xs py-3.5 rounded-xl uppercase tracking-wider shadow-md cursor-pointer">
+                            Claim Earned Points
+                        </button>
+                    </div>
+
+                    <div class="flex justify-between items-center text-[10px] text-slate-400 pt-1 border-t border-slate-200/60">
+                        <span>Daily Completion Loop:</span>
+                        <span id="daily-fraction-counter" class="font-bold text-slate-700">0 / 20 Tasks</span>
+                    </div>
+                </div>
+
+                <div id="all-tasks-completed-wall" class="hidden w-full bg-slate-50 border border-slate-200 rounded-2xl p-6 text-center space-y-3 shadow-sm">
+                    <span class="text-3xl block animate-bounce">⚡</span>
+                    <h3 class="font-black text-sm text-slate-900 uppercase tracking-wide">Daily Limit Reached</h3>
+                    <p class="text-xs text-slate-500 max-w-xs mx-auto leading-relaxed">Fantastic! You've successfully completed all 20 of your tasks for today. Return tomorrow to claim your next streak level.</p>
+                </div>
+            </div>
+
+            <div id="screen-wallet" class="hidden space-y-4 bg-white">
+                <div class="w-full bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200 rounded-2xl p-4 flex justify-between items-center shadow-sm">
+                    <div class="space-y-0.5">
+                        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Withdrawable Balance</p>
+                        <h3 id="wallet-converted-cash" class="font-black text-2xl text-emerald-600">₹0.00</h3>
+                    </div>
+                    <div class="text-right text-[10px] text-slate-400 font-medium">
+                        <span class="block font-bold text-slate-600">Exchange Standard:</span>
+                        <span>1,200 Pts = ₹1</span>
+                    </div>
+                </div>
+
+                <div class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3.5 shadow-sm">
+                    <div class="border-b border-slate-200 pb-2"><h4 class="font-black text-xs text-slate-700 uppercase tracking-wider">⚡ UPI Transfer</h4></div>
+                    <div class="space-y-2.5">
+                        <input type="text" id="upi-input-name" placeholder="Enter Full Name" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-xs">
+                        <input type="text" id="upi-input-address" placeholder="username@bank" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-xs">
+                        <input type="number" id="upi-input-amount" placeholder="Enter Amount in ₹" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-xs">
+                    </div>
+                    <button onclick="dispatchWithdrawal('UPI')" class="w-full bg-white border border-slate-200 text-slate-700 font-black text-xs py-3 rounded-xl uppercase tracking-wider cursor-pointer mt-1">Withdraw</button>
+                </div>
+            </div>
+        </main>
+
+        <nav class="fixed bottom-3 left-4 right-4 max-w-md mx-auto bg-white/95 border border-slate-200 rounded-2xl px-12 py-3 flex justify-between items-center z-50 shadow-lg backdrop-blur-md">
+            <button onclick="switchScreen('home')" id="nav-btn-home" class="flex flex-col items-center space-y-1 text-indigo-600 font-black scale-105"><span class="text-base">🏠</span><span class="text-[10px] uppercase">Home</span></button>
+            <button onclick="switchScreen('wallet')" id="nav-btn-wallet" class="flex flex-col items-center space-y-1 text-slate-400 font-medium"><span class="text-base">💼</span><span class="text-[10px] uppercase">Wallet</span></button>
+        </nav>
+    </div>
+
+    <script>
+        // Localhost configuration route during system construction builds
+        const BACKEND_ENDPOINT_CONDUIT = "https://tasknearn-backend.onrender.com";
+        const POINT_VALUE_DENOMINATOR = 1200; // Updated to 1,200 Points = ₹1.00
+        const SECONDS_REQUIRED = 300; 
+
+        let clientState = { points: 0, current_day: 1, daily_task_counter: 0, last_completion_date: null };
+        let timerExecutionRef = null;
+        let activeUserSession = { id: 123456789, username: "LocalDeveloper" };
+
+        if (window.Telegram && window.Telegram.WebApp) {
+            const tg = window.Telegram.WebApp;
+            tg.ready(); tg.expand();
+            if (tg.initDataUnsafe && tg.initDataUnsafe.user) { activeUserSession = tg.initDataUnsafe.user; }
+        }
+
+        function switchScreen(viewKey) {
+            if (viewKey === 'home') {
+                document.getElementById('screen-home').classList.remove('hidden');
+                document.getElementById('screen-wallet').classList.add('hidden');
+            } else {
+                document.getElementById('screen-home').classList.add('hidden');
+                document.getElementById('screen-wallet').classList.remove('hidden');
+                document.getElementById('wallet-converted-cash').innerText = `₹${(clientState.points / POINT_VALUE_DENOMINATOR).toFixed(2)}`;
+            }
+        }
+
+        function getActiveTaskRewards(taskNumber) {
+            const currentWeek = Math.floor((clientState.current_day - 1) / 7) + 1;
+            let baseRate = 100;
+            if (currentWeek === 2) baseRate = 120;
+            else if (currentWeek === 3) baseRate = 140;
+            else if (currentWeek === 4) baseRate = 160;
+
+            if (taskNumber <= 4) return { points: baseRate * 1.00, txt: "(1x Multiplier)" };
+            if (taskNumber <= 8) return { points: baseRate * 1.25, txt: "(1.25x Multiplier)" };
+            if (taskNumber <= 12) return { points: baseRate * 1.50, txt: "(1.5x Multiplier)" };
+            if (taskNumber <= 16) return { points: baseRate * 1.75, txt: "(1.75x Multiplier)" };
+            return { points: baseRate * 2.00, txt: "(2x Multiplier)" };
+        }
+
+        function synchronizeInterfaceDisplay() {
+            document.getElementById('user-name').innerText = activeUserSession.username || `ID: ${activeUserSession.id}`;
+            document.getElementById('display-points').innerText = clientState.points.toLocaleString('en-IN');
+            
+            const weekIdx = Math.floor((clientState.current_day - 1) / 7) + 1;
+            document.getElementById('label-current-week').innerText = `Week ${weekIdx} Progression`;
+            document.getElementById('streak-counter-tag').innerText = `Day ${((clientState.current_day - 1) % 7) + 1} / 7`;
+
+            const gridContainer = document.getElementById('streak-grid-row');
+            gridContainer.innerHTML = "";
+            for (let d = 1; d <= 7; d++) {
+                const mapVal = ((weekIdx - 1) * 7) + d;
+                if (mapVal < clientState.current_day) {
+                    gridContainer.innerHTML += `<div class="aspect-square border border-emerald-200 bg-emerald-50 rounded-lg flex items-center justify-center text-emerald-600">✅</div>`;
+                } else if (mapVal === clientState.current_day) {
+                    gridContainer.innerHTML += `<div class="aspect-square border-2 border-indigo-500 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-600 animate-pulse">🔥</div>`;
+                } else {
+                    gridContainer.innerHTML += `<div class="aspect-square border border-slate-200 bg-white rounded-lg flex items-center justify-center text-slate-400 font-bold">${d}</div>`;
+                }
+            }
+
+            if (clientState.daily_task_counter >= 20) {
+                document.getElementById('action-terminal-block').parentElement.classList.add('hidden');
+                document.getElementById('all-tasks-completed-wall').classList.remove('hidden');
+            } else {
+                document.getElementById('action-terminal-block').parentElement.classList.remove('hidden');
+                document.getElementById('all-tasks-completed-wall').classList.add('hidden');
+                
+                const nextIdx = clientState.daily_task_counter + 1;
+                document.getElementById('active-task-idx-badge').innerText = `${nextIdx}/20 Task`;
+                const rewards = getActiveTaskRewards(nextIdx);
+                document.getElementById('active-task-points-value').innerText = `+${rewards.points} Pts`;
+                document.getElementById('active-task-multiplier').innerText = rewards.txt;
+                document.getElementById('daily-fraction-counter').innerText = `${clientState.daily_task_counter} / 20 Tasks`;
+            }
+        }
+
+        async function executeTaskRedirect() {
+            document.getElementById('btn-redirect-gplinks').classList.add('hidden');
+            document.getElementById('timer-lock-block').classList.remove('hidden');
+
+            let countdown = SECONDS_REQUIRED;
+            timerExecutionRef = setInterval(() => {
+                countdown--;
+                document.getElementById('countdown-clock').innerText = `${Math.floor(countdown/60).toString().padStart(2,'0')}:${(countdown%60).toString().padStart(2,'0')}`;
+                if (countdown <= 0) {
+                    clearInterval(timerExecutionRef);
+                    document.getElementById('timer-lock-block').classList.add('hidden');
+                    document.getElementById('btn-claim-points').classList.remove('hidden');
+                }
+            }, 1000);
+
+            try {
+                const res = await fetch(`${BACKEND_ENDPOINT_CONDUIT}/api/tasks/request-proxy`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ telegram_id: activeUserSession.id })
+                });
+                const payload = await res.json();
+                if (payload.shortlink_url) {
+                    if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openLink) {
+                        window.Telegram.WebApp.openLink(payload.shortlink_url);
+                    } else { window.open(payload.shortlink_url, '_blank'); }
+                }
+            } catch (err) { console.warn("Backend synchronization delay."); }
+        }
+
+        async function processPointsClaimHandshake() {
+            try {
+                const res = await fetch(`${BACKEND_ENDPOINT_CONDUIT}/api/tasks/verify-handshake`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ telegram_id: activeUserSession.id })
+                });
+                const data = await res.json();
+                if (!res.ok) { alert(data.error); return; }
+                
+                alert(`🏆 Success! Verified and credited +${data.added_points} Pts!`);
+                document.getElementById('btn-claim-points').classList.add('hidden');
+                document.getElementById('btn-redirect-gplinks').classList.remove('hidden');
+                initializeUserProfileData();
+            } catch (e) { alert("Network authentication failed."); }
+        }
+
+        async function dispatchWithdrawal(channel) {
+            const name = document.getElementById('upi-input-name').value.trim();
+            const addr = document.getElementById('upi-input-address').value.trim();
+            const amt = parseFloat(document.getElementById('upi-input-amount').value);
+
+            if (!name || !addr || isNaN(amt) || amt <= 0) { alert("Please input complete payout forms."); return; }
+            
+            try {
+                const res = await fetch(`${BACKEND_ENDPOINT_CONDUIT}/api/wallet/withdraw`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        telegram_id: activeUserSession.id,
+                        account_name: name,
+                        payment_channel: channel,
+                        destination_address: addr,
+                        amount_in_rupees: amt
+                    })
+                });
+                const data = await res.json();
+                if (!res.ok) { alert(data.error); return; }
+
+                alert(`✅ Withdrawal request logged successfully for ₹${amt}!`);
+                document.getElementById('upi-input-amount').value = "";
+                initializeUserProfileData();
+            } catch (err) { alert("Transaction dispatch interrupted."); }
+        }
+
+        async function initializeUserProfileData() {
+            try {
+                const res = await fetch(`${BACKEND_ENDPOINT_CONDUIT}/api/profile/load?id=${activeUserSession.id}&username=${encodeURIComponent(activeUserSession.username || '')}`);
+                const data = await res.json();
+                if (data && data.state) { clientState = data.state; }
+            } catch (e) { console.warn("Local data execution sandbox environment initialized."); }
+            synchronizeInterfaceDisplay();
+        }
+
+        window.onload = initializeUserProfileData;
+    </script>
+</body>
+</html>
