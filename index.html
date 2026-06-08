@@ -94,14 +94,33 @@
                     </div>
                 </div>
 
-                <div class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3.5 shadow-sm">
-                    <div class="border-b border-slate-200 pb-2"><h4 class="font-black text-xs text-slate-700 uppercase tracking-wider">⚡ UPI Transfer</h4></div>
+                <div class="grid grid-cols-2 gap-2 p-1 bg-slate-100 rounded-xl border border-slate-200">
+                    <button onclick="togglePayoutChannel('UPI')" id="tab-btn-upi" class="py-2 text-xs font-black rounded-lg transition-all cursor-pointer bg-white text-indigo-600 shadow-sm">
+                        ⚡ UPI Transfer
+                    </button>
+                    <button onclick="togglePayoutChannel('GIFT')" id="tab-btn-gift" class="py-2 text-xs font-black rounded-lg transition-all cursor-pointer text-slate-500 hover:text-slate-800">
+                        🎮 Play Gift Card
+                    </button>
+                </div>
+
+                <div id="form-channel-upi" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3.5 shadow-sm">
+                    <div class="border-b border-slate-200 pb-2"><h4 class="font-black text-xs text-slate-700 uppercase tracking-wider">UPI Transfer details</h4></div>
                     <div class="space-y-2.5">
                         <input type="text" id="upi-input-name" placeholder="Enter Full Name" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-xs">
                         <input type="text" id="upi-input-address" placeholder="username@bank" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-xs">
                         <input type="number" id="upi-input-amount" placeholder="Enter Amount in ₹" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-xs">
                     </div>
-                    <button onclick="dispatchWithdrawal('UPI')" class="w-full bg-white border border-slate-200 text-slate-700 font-black text-xs py-3 rounded-xl uppercase tracking-wider cursor-pointer mt-1">Withdraw</button>
+                    <button onclick="dispatchWithdrawal('UPI')" class="w-full bg-gradient-to-r from-indigo-500 to-violet-600 text-white font-black text-xs py-3 rounded-xl uppercase tracking-wider cursor-pointer mt-1 shadow-sm">Withdraw to UPI</button>
+                </div>
+
+                <div id="form-channel-gift" class="hidden w-full bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3.5 shadow-sm">
+                    <div class="border-b border-slate-200 pb-2"><h4 class="font-black text-xs text-slate-700 uppercase tracking-wider">Google Play Redeem Code</h4></div>
+                    <div class="space-y-2.5">
+                        <input type="text" id="gift-input-name" placeholder="Enter Full Name" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-xs">
+                        <input type="email" id="gift-input-address" placeholder="Enter Email Address (Code will be sent here)" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-xs">
+                        <input type="number" id="gift-input-amount" placeholder="Enter Card Amount (₹10, ₹50, ₹100, etc.)" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-xs">
+                    </div>
+                    <button onclick="dispatchWithdrawal('WALLET')" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-black text-xs py-3 rounded-xl uppercase tracking-wider cursor-pointer mt-1 shadow-sm">Request Gift Card</button>
                 </div>
             </div>
         </main>
@@ -113,9 +132,9 @@
     </div>
 
     <script>
-        // Localhost configuration route during system construction builds
+        // Production API endpoint configuration mapping
         const BACKEND_ENDPOINT_CONDUIT = "https://tasknearn-backend.onrender.com";
-        const POINT_VALUE_DENOMINATOR = 1200; // Updated to 1,200 Points = ₹1.00
+        const POINT_VALUE_DENOMINATOR = 1200; // Strict 1,200 Points = ₹1.00
         const SECONDS_REQUIRED = 300; 
 
         let clientState = { points: 0, current_day: 1, daily_task_counter: 0, last_completion_date: null };
@@ -136,6 +155,25 @@
                 document.getElementById('screen-home').classList.add('hidden');
                 document.getElementById('screen-wallet').classList.remove('hidden');
                 document.getElementById('wallet-converted-cash').innerText = `₹${(clientState.points / POINT_VALUE_DENOMINATOR).toFixed(2)}`;
+            }
+        }
+
+        function togglePayoutChannel(targetChannel) {
+            const upiTab = document.getElementById('tab-btn-upi');
+            const giftTab = document.getElementById('tab-btn-gift');
+            const upiForm = document.getElementById('form-channel-upi');
+            const giftForm = document.getElementById('form-channel-gift');
+
+            if (targetChannel === 'UPI') {
+                upiTab.className = "py-2 text-xs font-black rounded-lg transition-all cursor-pointer bg-white text-indigo-600 shadow-sm";
+                giftTab.className = "py-2 text-xs font-black rounded-lg transition-all cursor-pointer text-slate-500 hover:text-slate-800";
+                upiForm.classList.remove('hidden');
+                giftForm.classList.add('hidden');
+            } else {
+                giftTab.className = "py-2 text-xs font-black rounded-lg transition-all cursor-pointer bg-white text-emerald-600 shadow-sm";
+                upiTab.className = "py-2 text-xs font-black rounded-lg transition-all cursor-pointer text-slate-500 hover:text-slate-800";
+                giftForm.classList.remove('hidden');
+                upiForm.classList.add('hidden');
             }
         }
 
@@ -238,9 +276,17 @@
         }
 
         async function dispatchWithdrawal(channel) {
-            const name = document.getElementById('upi-input-name').value.trim();
-            const addr = document.getElementById('upi-input-address').value.trim();
-            const amt = parseFloat(document.getElementById('upi-input-amount').value);
+            let name, addr, amt;
+            
+            if (channel === 'UPI') {
+                name = document.getElementById('upi-input-name').value.trim();
+                addr = document.getElementById('upi-input-address').value.trim();
+                amt = parseFloat(document.getElementById('upi-input-amount').value);
+            } else {
+                name = document.getElementById('gift-input-name').value.trim();
+                addr = document.getElementById('gift-input-address').value.trim();
+                amt = parseFloat(document.getElementById('gift-input-amount').value);
+            }
 
             if (!name || !addr || isNaN(amt) || amt <= 0) { alert("Please input complete payout forms."); return; }
             
@@ -251,7 +297,7 @@
                     body: JSON.stringify({
                         telegram_id: activeUserSession.id,
                         account_name: name,
-                        payment_channel: channel,
+                        payment_channel: channel, // Passes 'UPI' or 'WALLET' seamlessly to your backend
                         destination_address: addr,
                         amount_in_rupees: amt
                     })
@@ -260,7 +306,8 @@
                 if (!res.ok) { alert(data.error); return; }
 
                 alert(`✅ Withdrawal request logged successfully for ₹${amt}!`);
-                document.getElementById('upi-input-amount').value = "";
+                if (channel === 'UPI') document.getElementById('upi-input-amount').value = "";
+                else document.getElementById('gift-input-amount').value = "";
                 initializeUserProfileData();
             } catch (err) { alert("Transaction dispatch interrupted."); }
         }
