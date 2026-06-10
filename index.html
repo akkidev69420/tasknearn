@@ -140,7 +140,6 @@
         const SECONDS_REQUIRED = 300; 
 
         let clientState = { points: 0, current_day: 1, daily_task_counter: 0, last_completion_date: null };
-        let currentServerTimeMs = new Date().getTime();
         let timerExecutionRef = null;
         let rolloverClockIntervalRef = null;
         let activeUserSession = { id: 123456789, username: "LocalDeveloper" };
@@ -195,19 +194,20 @@
             return { points: baseRate * 2.00, txt: "(2x Multiplier)" };
         }
 
-        // --- ENFORCE STRICT ROLLING 24 HOUR TIMING LOGIC FRONTEND ---
-        function initiateRolling24HClock(completionTimestampIso) {
+        // ABSOLUTE MATHEMATICAL 24H LIVE CLOCK
+        function initiateRolling24HClock(completionTimestampMsStr) {
             if (rolloverClockIntervalRef) clearInterval(rolloverClockIntervalRef);
 
-            const lockUnlockTargetMs = new Date(completionTimestampIso).getTime() + (24 * 60 * 60 * 1000);
+            const lastCompletionMs = parseInt(completionTimestampMsStr);
+            const lockUnlockTargetMs = lastCompletionMs + (24 * 60 * 60 * 1000);
 
             function updateClock() {
-                const nowMs = new Date().getTime();
+                const nowMs = Date.now();
                 const diffMs = lockUnlockTargetMs - nowMs;
 
                 if (diffMs <= 0) {
                     clearInterval(rolloverClockIntervalRef);
-                    initializeUserProfileData(); // Fresh verification sync pulls up next batch automatically
+                    initializeUserProfileData();
                     return;
                 }
 
@@ -244,11 +244,11 @@
                 }
             }
 
-            // ASSESS ROLLING LOCK VERIFICATION CONDITIONS
+            // EVALUATE LOCK STATUS VIA RAW TIME DELTA
             let isLocked = false;
             if (clientState.last_completion_date) {
-                const completionMs = new Date(clientState.last_completion_date).getTime();
-                if ((new Date().getTime() - completionMs) < (24 * 60 * 60 * 1000)) {
+                const completionMs = parseInt(clientState.last_completion_date);
+                if ((Date.now() - completionMs) < (24 * 60 * 60 * 1000)) {
                     isLocked = true;
                 }
             }
@@ -370,7 +370,6 @@
                 const data = await res.json();
                 if (data && data.state) { 
                     clientState = data.state; 
-                    currentServerTimeMs = data.server_time_ms;
                 }
             } catch (e) { console.warn("Initialization sandbox active."); }
             synchronizeInterfaceDisplay();
