@@ -43,7 +43,7 @@
                     </div>
                 </div>
 
-                <div class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-4 shadow-sm relative overflow-hidden">
+                <div id="active-task-container-card" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-4 shadow-sm relative overflow-hidden">
                     <div class="flex justify-between items-start">
                         <div>
                             <span id="active-task-idx-badge" class="text-[10px] bg-indigo-600 text-white font-black px-2 py-0.5 rounded uppercase tracking-wider">1st Task</span>
@@ -56,13 +56,13 @@
                     </div>
 
                     <div id="action-terminal-block" class="pt-2">
-                        <button id="btn-redirect-gplinks" onclick="executeTaskRedirect()" class="w-full bg-gradient-to-r from-indigo-500 to-violet-600 text-white font-black text-xs py-3.5 rounded-xl uppercase tracking-wider shadow-md cursor-pointer">
+                        <button id="btn-redirect-task" onclick="executeTaskRedirect()" class="w-full bg-gradient-to-r from-indigo-500 to-violet-600 text-white font-black text-xs py-3.5 rounded-xl uppercase tracking-wider shadow-md cursor-pointer">
                             Read for 5 Minutes
                         </button>
                         <div id="timer-lock-block" class="hidden w-full bg-white border border-slate-200 rounded-xl p-3 text-center space-y-1.5 shadow-inner">
                             <span class="text-[10px] text-slate-400 uppercase tracking-widest font-bold block">Verification Lock Active</span>
                             <div id="countdown-clock" class="text-xl font-black text-indigo-600 font-mono tracking-wider">05:00</div>
-                            <span class="text-[9px] text-slate-500 block">Complete the GPLinks article adblock and wait for the timer to finish.</span>
+                            <span class="text-[9px] text-slate-500 block">Complete the given Task and wait for the timer to finish.</span>
                         </div>
                         <button id="btn-claim-points" onclick="processPointsClaimHandshake()" class="hidden w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-black text-xs py-3.5 rounded-xl uppercase tracking-wider shadow-md cursor-pointer">
                             Claim Earned Points
@@ -76,9 +76,14 @@
                 </div>
 
                 <div id="all-tasks-completed-wall" class="hidden w-full bg-slate-50 border border-slate-200 rounded-2xl p-6 text-center space-y-3 shadow-sm">
-                    <span class="text-3xl block animate-bounce">⚡</span>
-                    <h3 class="font-black text-sm text-slate-900 uppercase tracking-wide">Daily Limit Reached</h3>
-                    <p class="text-xs text-slate-500 max-w-xs mx-auto leading-relaxed">Fantastic! You've successfully completed all 20 of your tasks for today. Return tomorrow to claim your next streak level.</p>
+                    <span class="text-3xl block animate-bounce">⏳</span>
+                    <h3 class="font-black text-sm text-slate-900 uppercase tracking-wide">Rolling Lockout Active</h3>
+                    <p class="text-xs text-slate-500 max-w-xs mx-auto leading-relaxed">You've successfully completed all 20 of your tasks. The next batch will unlock exactly 24 hours after your last completion.</p>
+                    
+                    <div class="bg-white border border-slate-200 rounded-xl p-4 mt-2 max-w-xs mx-auto shadow-inner">
+                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest block">Next Tasks Unlocks In</span>
+                        <div id="rollover-countdown-clock" class="text-2xl font-black text-rose-500 font-mono mt-1 tracking-widest">24:00:00</div>
+                    </div>
                 </div>
             </div>
 
@@ -95,12 +100,8 @@
                 </div>
 
                 <div class="grid grid-cols-2 gap-2 p-1 bg-slate-100 rounded-xl border border-slate-200">
-                    <button onclick="togglePayoutChannel('UPI')" id="tab-btn-upi" class="py-2 text-xs font-black rounded-lg transition-all cursor-pointer bg-white text-indigo-600 shadow-sm">
-                        ⚡ UPI Transfer
-                    </button>
-                    <button onclick="togglePayoutChannel('GIFT')" id="tab-btn-gift" class="py-2 text-xs font-black rounded-lg transition-all cursor-pointer text-slate-500 hover:text-slate-800">
-                        🎮 Play Gift Card
-                    </button>
+                    <button onclick="togglePayoutChannel('UPI')" id="tab-btn-upi" class="py-2 text-xs font-black rounded-lg transition-all cursor-pointer bg-white text-indigo-600 shadow-sm">⚡ UPI Transfer</button>
+                    <button onclick="togglePayoutChannel('GIFT')" id="tab-btn-gift" class="py-2 text-xs font-black rounded-lg transition-all cursor-pointer text-slate-500 hover:text-slate-800">🎮 Play Gift Card</button>
                 </div>
 
                 <div id="form-channel-upi" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3.5 shadow-sm">
@@ -110,6 +111,7 @@
                         <input type="text" id="upi-input-address" placeholder="username@bank" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-xs">
                         <input type="number" id="upi-input-amount" placeholder="Enter Amount in ₹" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-xs">
                     </div>
+                    <input type="hidden" id="upi-input-channel" value="UPI">
                     <button onclick="dispatchWithdrawal('UPI')" class="w-full bg-gradient-to-r from-indigo-500 to-violet-600 text-white font-black text-xs py-3 rounded-xl uppercase tracking-wider cursor-pointer mt-1 shadow-sm">Withdraw to UPI</button>
                 </div>
 
@@ -117,10 +119,11 @@
                     <div class="border-b border-slate-200 pb-2"><h4 class="font-black text-xs text-slate-700 uppercase tracking-wider">Google Play Redeem Code</h4></div>
                     <div class="space-y-2.5">
                         <input type="text" id="gift-input-name" placeholder="Enter Full Name" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-xs">
-                        <input type="email" id="gift-input-address" placeholder="Enter Email Address (Code will be sent here)" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-xs">
-                        <input type="number" id="gift-input-amount" placeholder="Enter Card Amount (₹10, ₹50, ₹100, etc.)" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-xs">
+                        <input type="email" id="gift-input-address" placeholder="Enter Email Address" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-xs">
+                        <input type="number" id="gift-input-amount" placeholder="Enter Card Amount" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-xs">
                     </div>
-                    <button onclick="dispatchWithdrawal('WALLET')" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-black text-xs py-3 rounded-xl uppercase tracking-wider cursor-pointer mt-1 shadow-sm">Request Gift Card</button>
+                    <input type="hidden" id="gift-input-channel" value="WALLET">
+                    <button onclick="dispatchWithdrawal('GIFT')" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-black text-xs py-3 rounded-xl uppercase tracking-wider cursor-pointer mt-1 shadow-sm">Request Gift Card</button>
                 </div>
             </div>
         </main>
@@ -132,13 +135,14 @@
     </div>
 
     <script>
-        // Production API endpoint configuration mapping
         const BACKEND_ENDPOINT_CONDUIT = "https://tasknearn-backend.onrender.com";
-        const POINT_VALUE_DENOMINATOR = 1200; // Strict 1,200 Points = ₹1.00
+        const POINT_VALUE_DENOMINATOR = 1200; 
         const SECONDS_REQUIRED = 300; 
 
         let clientState = { points: 0, current_day: 1, daily_task_counter: 0, last_completion_date: null };
+        let currentServerTimeMs = new Date().getTime();
         let timerExecutionRef = null;
+        let rolloverClockIntervalRef = null;
         let activeUserSession = { id: 123456789, username: "LocalDeveloper" };
 
         if (window.Telegram && window.Telegram.WebApp) {
@@ -191,6 +195,34 @@
             return { points: baseRate * 2.00, txt: "(2x Multiplier)" };
         }
 
+        // --- ENFORCE STRICT ROLLING 24 HOUR TIMING LOGIC FRONTEND ---
+        function initiateRolling24HClock(completionTimestampIso) {
+            if (rolloverClockIntervalRef) clearInterval(rolloverClockIntervalRef);
+
+            const lockUnlockTargetMs = new Date(completionTimestampIso).getTime() + (24 * 60 * 60 * 1000);
+
+            function updateClock() {
+                const nowMs = new Date().getTime();
+                const diffMs = lockUnlockTargetMs - nowMs;
+
+                if (diffMs <= 0) {
+                    clearInterval(rolloverClockIntervalRef);
+                    initializeUserProfileData(); // Fresh verification sync pulls up next batch automatically
+                    return;
+                }
+
+                const totalSecs = Math.floor(diffMs / 1000);
+                const hrs = Math.floor(totalSecs / 3600).toString().padStart(2, '0');
+                const mins = Math.floor((totalSecs % 3600) / 60).toString().padStart(2, '0');
+                const secs = (totalSecs % 60).toString().padStart(2, '0');
+
+                document.getElementById('rollover-countdown-clock').innerText = `${hrs}:${mins}:${secs}`;
+            }
+
+            updateClock();
+            rolloverClockIntervalRef = setInterval(updateClock, 1000);
+        }
+
         function synchronizeInterfaceDisplay() {
             document.getElementById('user-name').innerText = activeUserSession.username || `ID: ${activeUserSession.id}`;
             document.getElementById('display-points').innerText = clientState.points.toLocaleString('en-IN');
@@ -212,13 +244,24 @@
                 }
             }
 
-            if (clientState.daily_task_counter >= 20) {
-                document.getElementById('action-terminal-block').parentElement.classList.add('hidden');
+            // ASSESS ROLLING LOCK VERIFICATION CONDITIONS
+            let isLocked = false;
+            if (clientState.last_completion_date) {
+                const completionMs = new Date(clientState.last_completion_date).getTime();
+                if ((new Date().getTime() - completionMs) < (24 * 60 * 60 * 1000)) {
+                    isLocked = true;
+                }
+            }
+
+            if (isLocked) {
+                document.getElementById('active-task-container-card').classList.add('hidden');
                 document.getElementById('all-tasks-completed-wall').classList.remove('hidden');
+                initiateRolling24HClock(clientState.last_completion_date);
             } else {
-                document.getElementById('action-terminal-block').parentElement.classList.remove('hidden');
+                document.getElementById('active-task-container-card').classList.remove('hidden');
                 document.getElementById('all-tasks-completed-wall').classList.add('hidden');
-                
+                if (rolloverClockIntervalRef) clearInterval(rolloverClockIntervalRef);
+
                 const nextIdx = clientState.daily_task_counter + 1;
                 document.getElementById('active-task-idx-badge').innerText = `${nextIdx}/20 Task`;
                 const rewards = getActiveTaskRewards(nextIdx);
@@ -229,7 +272,7 @@
         }
 
         async function executeTaskRedirect() {
-            document.getElementById('btn-redirect-gplinks').classList.add('hidden');
+            document.getElementById('btn-redirect-task').classList.add('hidden');
             document.getElementById('timer-lock-block').classList.remove('hidden');
 
             let countdown = SECONDS_REQUIRED;
@@ -250,6 +293,13 @@
                     body: JSON.stringify({ telegram_id: activeUserSession.id })
                 });
                 const payload = await res.json();
+                if (!res.ok) {
+                    alert(payload.error);
+                    clearInterval(timerExecutionRef);
+                    document.getElementById('timer-lock-block').classList.add('hidden');
+                    document.getElementById('btn-redirect-task').classList.remove('hidden');
+                    return;
+                }
                 if (payload.shortlink_url) {
                     if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openLink) {
                         window.Telegram.WebApp.openLink(payload.shortlink_url);
@@ -270,22 +320,24 @@
                 
                 alert(`🏆 Success! Verified and credited +${data.added_points} Pts!`);
                 document.getElementById('btn-claim-points').classList.add('hidden');
-                document.getElementById('btn-redirect-gplinks').classList.remove('hidden');
+                document.getElementById('btn-redirect-task').classList.remove('hidden');
                 initializeUserProfileData();
             } catch (e) { alert("Network authentication failed."); }
         }
 
-        async function dispatchWithdrawal(channel) {
-            let name, addr, amt;
+        async function dispatchWithdrawal(formIdKey) {
+            let name, addr, amt, passChannel;
             
-            if (channel === 'UPI') {
+            if (formIdKey === 'UPI') {
                 name = document.getElementById('upi-input-name').value.trim();
                 addr = document.getElementById('upi-input-address').value.trim();
                 amt = parseFloat(document.getElementById('upi-input-amount').value);
+                passChannel = document.getElementById('upi-input-channel').value;
             } else {
                 name = document.getElementById('gift-input-name').value.trim();
                 addr = document.getElementById('gift-input-address').value.trim();
                 amt = parseFloat(document.getElementById('gift-input-amount').value);
+                passChannel = document.getElementById('gift-input-channel').value;
             }
 
             if (!name || !addr || isNaN(amt) || amt <= 0) { alert("Please input complete payout forms."); return; }
@@ -297,7 +349,7 @@
                     body: JSON.stringify({
                         telegram_id: activeUserSession.id,
                         account_name: name,
-                        payment_channel: channel, // Passes 'UPI' or 'WALLET' seamlessly to your backend
+                        payment_channel: passChannel,
                         destination_address: addr,
                         amount_in_rupees: amt
                     })
@@ -306,7 +358,7 @@
                 if (!res.ok) { alert(data.error); return; }
 
                 alert(`✅ Withdrawal request logged successfully for ₹${amt}!`);
-                if (channel === 'UPI') document.getElementById('upi-input-amount').value = "";
+                if (formIdKey === 'UPI') document.getElementById('upi-input-amount').value = "";
                 else document.getElementById('gift-input-amount').value = "";
                 initializeUserProfileData();
             } catch (err) { alert("Transaction dispatch interrupted."); }
@@ -316,8 +368,11 @@
             try {
                 const res = await fetch(`${BACKEND_ENDPOINT_CONDUIT}/api/profile/load?id=${activeUserSession.id}&username=${encodeURIComponent(activeUserSession.username || '')}`);
                 const data = await res.json();
-                if (data && data.state) { clientState = data.state; }
-            } catch (e) { console.warn("Local data execution sandbox environment initialized."); }
+                if (data && data.state) { 
+                    clientState = data.state; 
+                    currentServerTimeMs = data.server_time_ms;
+                }
+            } catch (e) { console.warn("Initialization sandbox active."); }
             synchronizeInterfaceDisplay();
         }
 
