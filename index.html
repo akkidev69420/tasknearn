@@ -57,11 +57,11 @@
 
                     <div id="action-terminal-block" class="pt-2">
                         <button id="btn-redirect-task" onclick="executeTaskRedirect()" class="w-full bg-gradient-to-r from-indigo-500 to-violet-600 text-white font-black text-xs py-3.5 rounded-xl uppercase tracking-wider shadow-md cursor-pointer">
-                            Read for 5 Minutes
+                            Read for 2 Minutes
                         </button>
                         <div id="timer-lock-block" class="hidden w-full bg-white border border-slate-200 rounded-xl p-3 text-center space-y-1.5 shadow-inner">
                             <span class="text-[10px] text-slate-400 uppercase tracking-widest font-bold block">Verification Lock Active</span>
-                            <div id="countdown-clock" class="text-xl font-black text-indigo-600 font-mono tracking-wider">05:00</div>
+                            <div id="countdown-clock" class="text-xl font-black text-indigo-600 font-mono tracking-wider">02:00</div>
                             <span class="text-[9px] text-slate-500 block">Complete the given Task and wait for the timer to finish.</span>
                         </div>
                         <button id="btn-claim-points" onclick="processPointsClaimHandshake()" class="hidden w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-black text-xs py-3.5 rounded-xl uppercase tracking-wider shadow-md cursor-pointer">
@@ -95,7 +95,7 @@
                     </div>
                     <div class="text-right text-[10px] text-slate-400 font-medium">
                         <span class="block font-bold text-slate-600">Exchange Standard:</span>
-                        <span>1,200 Pts = ₹1</span>
+                        <span>600 Pts = ₹1</span>
                     </div>
                 </div>
 
@@ -122,7 +122,7 @@
                         <input type="email" id="gift-input-address" placeholder="Enter Email Address" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-xs">
                         <input type="number" id="gift-input-amount" placeholder="Enter Card Amount" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-xs">
                     </div>
-                    <input type="hidden" id="gift-input-channel" value="WALLET">
+                    <input type="hidden" id="gift-input-channel" value="GIFT">
                     <button onclick="dispatchWithdrawal('GIFT')" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-black text-xs py-3 rounded-xl uppercase tracking-wider cursor-pointer mt-1 shadow-sm">Request Gift Card</button>
                 </div>
             </div>
@@ -136,8 +136,8 @@
 
     <script>
         const BACKEND_ENDPOINT_CONDUIT = "https://tasknearn-backend.onrender.com";
-        const POINT_VALUE_DENOMINATOR = 1200; 
-        const SECONDS_REQUIRED = 300; 
+        const POINT_VALUE_DENOMINATOR = 600; 
+        const SECONDS_REQUIRED = 120; 
 
         let clientState = { points: 0, current_day: 1, daily_task_counter: 0, last_completion_date: null };
         let timerExecutionRef = null;
