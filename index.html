@@ -135,6 +135,7 @@
     </div>
 
     <script>
+        // Production API endpoint connection setup
         const BACKEND_ENDPOINT_CONDUIT = "https://tasknearn-backend.onrender.com";
         const POINT_VALUE_DENOMINATOR = 600; 
 
@@ -145,7 +146,15 @@
         if (window.Telegram && window.Telegram.WebApp) {
             const tg = window.Telegram.WebApp;
             tg.ready(); tg.expand();
-            if (tg.initDataUnsafe && tg.initDataUnsafe.user) { activeUserSession = tg.initDataUnsafe.user; }
+            if (tg.initDataUnsafe && tg.initDataUnsafe.user) { 
+                activeUserSession = tg.initDataUnsafe.user; 
+            }
+        }
+
+        // Auto-populate structural header presentation values if properties are found inside MiniApp WebApp payload
+        if (activeUserSession && activeUserSession.username) {
+            document.getElementById('user-name').innerText = activeUserSession.username;
+            document.getElementById('user-avatar').innerText = activeUserSession.username.charAt(0).toUpperCase();
         }
 
         function switchScreen(viewKey) {
@@ -260,7 +269,6 @@
                 const nextIdx = clientState.daily_task_counter + 1;
                 document.getElementById('active-task-idx-badge').innerText = `${nextIdx}/20 Task`;
                 
-                // UX: Dynamic Labeling based on current block index
                 const labelElement = document.getElementById('active-task-network-label');
                 if (nextIdx <= 5) labelElement.innerText = "Monetag Stream 1";
                 else if (nextIdx <= 10) labelElement.innerText = "Adsterra Stream 1";
