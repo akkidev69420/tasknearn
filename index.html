@@ -270,10 +270,10 @@
                 document.getElementById('active-task-idx-badge').innerText = `${nextIdx}/20 Task`;
                 
                 const labelElement = document.getElementById('active-task-network-label');
-                if (nextIdx <= 5) labelElement.innerText = "Monetag Stream 1";
-                else if (nextIdx <= 10) labelElement.innerText = "Adsterra Stream 1";
-                else if (nextIdx <= 15) labelElement.innerText = "Monetag Stream 2";
-                else labelElement.innerText = "Adsterra Stream 2";
+                if (nextIdx <= 5) labelElement.innerText = "TASK 1-5";
+                else if (nextIdx <= 10) labelElement.innerText = "TASK 6-10";
+                else if (nextIdx <= 15) labelElement.innerText = "TASK 11-15";
+                else labelElement.innerText = "TASK 16-20";
 
                 const rewards = getActiveTaskRewards(nextIdx);
                 document.getElementById('active-task-points-value').innerText = `+${rewards.points} Pts`;
