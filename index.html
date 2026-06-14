@@ -60,7 +60,7 @@
 
                     <div id="action-terminal-block" class="pt-2 space-y-3">
                         <button id="btn-claim-ads" onclick="fireNativeProgrammaticAd()" class="w-full bg-gradient-to-r from-indigo-500 to-violet-600 text-white font-black text-xs py-3.5 rounded-xl uppercase tracking-wider shadow-md cursor-pointer block">
-                            Initialize Sync Protocol
+                            CLAIM POINTS
                         </button>
 
                         <p id="cooldown-timer-notice" class="hidden text-[11px] text-rose-500 font-bold text-center px-1 leading-relaxed border border-dashed border-rose-200 rounded-xl p-2.5 bg-rose-50/50 shadow-inner">
@@ -68,7 +68,7 @@
                         </p>
                         
                         <p class="text-[11px] text-slate-500 font-medium text-center px-1 leading-relaxed border border-dashed border-slate-200 rounded-xl p-2.5 bg-white shadow-inner">
-                            💡 Task modules cycle completely after a 6-hour gap window. Complete your 20-task stream daily to scale multi-fold payouts.
+                            💡 Complete more than 20 Tasks to earn more Points. To get Points, wait 10-15 seconds in the website after tapping CLAIM POINTS.
                         </p>
                     </div>
 
@@ -268,7 +268,7 @@
                 if (rolloverClockIntervalRef) clearInterval(rolloverClockIntervalRef);
 
                 const nextIdx = clientState.daily_task_counter + 1;
-                document.getElementById('active-task-idx-badge').innerText = `${nextIdx}/20 Node`;
+                document.getElementById('active-task-idx-badge').innerText = `${nextIdx}/20 MULTI-TAP TASKS`;
                 
                 // Show custom contextual titles based on layout rotation channels
                 const labelElement = document.getElementById('active-task-network-label');
@@ -283,7 +283,7 @@
                 const rewards = getActiveTaskRewards(nextIdx);
                 document.getElementById('active-task-points-value').innerText = `+${rewards.points} Pts`;
                 document.getElementById('active-task-multiplier').innerText = rewards.txt;
-                document.getElementById('daily-fraction-counter').innerText = `${clientState.daily_task_counter} / 20 Nodes`;
+                document.getElementById('daily-fraction-counter').innerText = `${clientState.daily_task_counter} / 20 MULTI-TAP TASKS`;
             }
         }
 
@@ -300,7 +300,7 @@
             const handshakeData = await handshakeRes.json();
             
             if (handshakeRes.ok) {
-                alert(`🏆 Success! Node verified and credited +${handshakeData.added_points} Pts!`);
+                alert(`🏆 Success! TASK verified and credited +${handshakeData.added_points} Pts!`);
                 triggerSecondaryPreloadCooldown(10);
             } else {
                 alert(handshakeData.error || "Handshake synchronization fault.");
@@ -311,7 +311,7 @@
         function resetSyncButtonState() {
             const adBtn = document.getElementById('btn-claim-ads');
             adBtn.disabled = false;
-            adBtn.innerText = "Initialize Sync Protocol";
+            adBtn.innerText = "CLAIM POINTS";
         }
 
         async function fireNativeProgrammaticAd() {
@@ -396,7 +396,7 @@
             noticeBlock.classList.remove('hidden');
 
             const loopTimerRef = setInterval(() => {
-                noticeBlock.innerText = `⏳ Next operational node active in ${timeRemaining}s...`;
+                noticeBlock.innerText = `⏳ Next operational task active in ${timeRemaining}s...`;
                 timeRemaining--;
 
                 if (timeRemaining < 0) {
@@ -404,7 +404,7 @@
                     noticeBlock.classList.add('hidden');
                     adBtn.classList.remove('hidden');
                     adBtn.disabled = false;
-                    adBtn.innerText = "Initialize Sync Protocol";
+                    adBtn.innerText = "CLAIM POINTS";
                     initializeUserProfileData();
                 }
             }, 1000);
