@@ -68,7 +68,7 @@
                         </p>
                         
                         <p class="text-[11px] text-slate-500 font-medium text-center px-1 leading-relaxed border border-dashed border-slate-200 rounded-xl p-2.5 bg-white shadow-inner">
-                            💡 Complete your 20-task stream daily to scale multi-fold payouts. Complete more 20-task streams in a single day to get more Points.
+                            💡 Task modules cycle completely after a 6-hour gap window. Complete your 20-task stream daily to scale multi-fold payouts.
                         </p>
                     </div>
 
@@ -270,14 +270,48 @@
                 const nextIdx = clientState.daily_task_counter + 1;
                 document.getElementById('active-task-idx-badge').innerText = `${nextIdx}/20 Node`;
                 
+                // Show custom contextual titles based on layout rotation channels
                 const labelElement = document.getElementById('active-task-network-label');
-                labelElement.innerText = `Multi-Tap Tasks (${nextIdx}/20)`;
+                if ([1, 4, 7, 10, 13, 16, 19, 20].includes(nextIdx)) {
+                    labelElement.innerText = `🎥 Video Data Stream (${nextIdx}/20)`;
+                } else if ([2, 5, 8, 11, 14, 17].includes(nextIdx)) {
+                    labelElement.innerText = `🛡️ In-App Content Node (${nextIdx}/20)`;
+                } else {
+                    labelElement.innerText = `🚀 Premium Secure Gateway (${nextIdx}/20)`;
+                }
 
                 const rewards = getActiveTaskRewards(nextIdx);
                 document.getElementById('active-task-points-value').innerText = `+${rewards.points} Pts`;
                 document.getElementById('active-task-multiplier').innerText = rewards.txt;
                 document.getElementById('daily-fraction-counter').innerText = `${clientState.daily_task_counter} / 20 Nodes`;
             }
+        }
+
+        // Helper endpoint trigger for clean handshake delivery
+        async function fireBackendHandshake(verificationToken) {
+            const handshakeRes = await fetch(`${BACKEND_ENDPOINT_CONDUIT}/api/tasks/verify-handshake`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    telegram_id: activeUserSession.id,
+                    token: verificationToken
+                })
+            });
+            const handshakeData = await handshakeRes.json();
+            
+            if (handshakeRes.ok) {
+                alert(`🏆 Success! Node verified and credited +${handshakeData.added_points} Pts!`);
+                triggerSecondaryPreloadCooldown(10);
+            } else {
+                alert(handshakeData.error || "Handshake synchronization fault.");
+                resetSyncButtonState();
+            }
+        }
+
+        function resetSyncButtonState() {
+            const adBtn = document.getElementById('btn-claim-ads');
+            adBtn.disabled = false;
+            adBtn.innerText = "Initialize Sync Protocol";
         }
 
         async function fireNativeProgrammaticAd() {
@@ -295,52 +329,61 @@
                 
                 if (!res.ok) {
                     alert(payload.error);
-                    adBtn.disabled = false;
-                    adBtn.innerText = "CLAIM POINTS";
+                    resetSyncButtonState();
                     return;
                 }
 
-                if (typeof show_11147364 === 'function') {
-                    show_11147364({ type: 'end' }).then(async (result) => {
+                if (typeof show_11147364 !== 'function') {
+                    alert("Network Core Offline. Please check your connectivity setup.");
+                    resetSyncButtonState();
+                    return;
+                }
+
+                const nextTaskNum = clientState.daily_task_counter + 1;
+
+                // ROUTER CATEGORY BLOCK
+                if ([1, 4, 7, 10, 13, 16, 19, 20].includes(nextTaskNum)) {
+                    // FORMAT A: Rewarded Interstitial Video Channels
+                    show_11147364().then(async (result) => {
                         if (result && result.reward_event_type === 'valued') {
-                            
-                            const handshakeRes = await fetch(`${BACKEND_ENDPOINT_CONDUIT}/api/tasks/verify-handshake`, {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({ 
-                                    telegram_id: activeUserSession.id,
-                                    token: "MONETAG_VALUED_IMPRESSION"
-                                })
-                            });
-                            const handshakeData = await handshakeRes.json();
-                            
-                            if (handshakeRes.ok) {
-                                alert(`🏆 Success! Node verified and credited +${handshakeData.added_points} Pts!`);
-                                triggerSecondaryPreloadCooldown(10);
-                            } else {
-                                alert(handshakeRes.error);
-                                adBtn.disabled = false;
-                                adBtn.innerText = "Initialize Sync Protocol";
-                            }
+                            await fireBackendHandshake("MONETAG_VALUED_IMPRESSION");
                         } else {
                             alert("⚠️ Sync Aborted: Stream must run to completion to log verification.");
-                            adBtn.disabled = false;
-                            adBtn.innerText = "Initialize Sync Protocol";
+                            resetSyncButtonState();
                         }
                     }).catch((err) => {
                         alert("Data stream pool empty. Please try again.");
-                        adBtn.disabled = false;
-                        adBtn.innerText = "Initialize Sync Protocol";
+                        resetSyncButtonState();
                     });
+
+                } else if ([2, 5, 8, 11, 14, 17].includes(nextTaskNum)) {
+                    // FORMAT B: In-App Inline Interstitials Banners
+                    show_11147364({
+                        type: 'inApp',
+                        inAppSettings: {
+                            frequency: 2,
+                            capping: 0.1,
+                            interval: 30,
+                            timeout: 5,
+                            everyPage: false
+                        }
+                    });
+                    
+                    // Instant backend progression fire for programmatic inApp frames
+                    await fireBackendHandshake("MONETAG_INAPP_BYPASS");
+
                 } else {
-                    alert("Network Core Offline. Please check your connectivity setup.");
-                    adBtn.disabled = false;
-                    adBtn.innerText = "Initialize Sync Protocol";
+                    // FORMAT C: High Payout Rewarded Popup Redirects
+                    show_11147364('pop').then(async () => {
+                        await fireBackendHandshake("MONETAG_VALUED_IMPRESSION");
+                    }).catch((e) => {
+                        alert("Secure gateway pipeline connection dropped. Please retry.");
+                        resetSyncButtonState();
+                    });
                 }
             } catch (err) {
                 console.warn("Backend connectivity sandbox error.");
-                adBtn.disabled = false;
-                adBtn.innerText = "Initialize Sync Protocol";
+                resetSyncButtonState();
             }
         }
 
@@ -353,7 +396,7 @@
             noticeBlock.classList.remove('hidden');
 
             const loopTimerRef = setInterval(() => {
-                noticeBlock.innerText = `⏳ Next multi-tap task active in ${timeRemaining}s...`;
+                noticeBlock.innerText = `⏳ Next operational node active in ${timeRemaining}s...`;
                 timeRemaining--;
 
                 if (timeRemaining < 0) {
