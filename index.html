@@ -68,7 +68,7 @@
                         </p>
                         
                         <p class="text-[11px] text-slate-500 font-medium text-center px-1 leading-relaxed border border-dashed border-slate-200 rounded-xl p-2.5 bg-white shadow-inner">
-                            💡 Task modules cycle completely after a 6-hour gap window. Complete your 20-task stream daily to scale multi-fold payouts.
+                            💡 Complete your 20-task stream daily to scale multi-fold payouts. Complete more 20-task streams in a single day to get more Points.
                         </p>
                     </div>
 
@@ -271,7 +271,7 @@
                 document.getElementById('active-task-idx-badge').innerText = `${nextIdx}/20 Node`;
                 
                 const labelElement = document.getElementById('active-task-network-label');
-                labelElement.innerText = `Network Data Node Sync (${nextIdx}/20)`;
+                labelElement.innerText = `Multi-Tap Tasks (${nextIdx}/20)`;
 
                 const rewards = getActiveTaskRewards(nextIdx);
                 document.getElementById('active-task-points-value').innerText = `+${rewards.points} Pts`;
@@ -296,7 +296,7 @@
                 if (!res.ok) {
                     alert(payload.error);
                     adBtn.disabled = false;
-                    adBtn.innerText = "Initialize Sync Protocol";
+                    adBtn.innerText = "CLAIM POINTS";
                     return;
                 }
 
@@ -353,7 +353,7 @@
             noticeBlock.classList.remove('hidden');
 
             const loopTimerRef = setInterval(() => {
-                noticeBlock.innerText = `⏳ Next operational node active in ${timeRemaining}s...`;
+                noticeBlock.innerText = `⏳ Next multi-tap task active in ${timeRemaining}s...`;
                 timeRemaining--;
 
                 if (timeRemaining < 0) {
