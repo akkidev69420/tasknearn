@@ -6,6 +6,9 @@
     <title>TaskNEarn Pro</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    
+    <script src='//libtl.com/sdk.js' data-zone='11147364' data-sdk='show_11147364'></script>
+
     <style>body { user-select: none; -webkit-user-select: none; background-color: #FFFFFF; }</style>
 </head>
 <body class="text-slate-800 font-sans min-h-screen pb-24 bg-white">
@@ -47,7 +50,7 @@
                     <div class="flex justify-between items-start">
                         <div>
                             <span id="active-task-idx-badge" class="text-[10px] bg-indigo-600 text-white font-black px-2 py-0.5 rounded uppercase tracking-wider">1st Task</span>
-                            <h2 class="font-black text-sm text-slate-900 mt-1.5 tracking-tight" id="active-task-network-label">Premium Ad Stream</h2>
+                            <h2 class="font-black text-sm text-slate-900 mt-1.5 tracking-tight" id="active-task-network-label">Secure Data Protocol Stream</h2>
                         </div>
                         <div class="text-right">
                             <span id="active-task-points-value" class="text-sm font-black text-emerald-600 block">+100 Pts</span>
@@ -56,16 +59,16 @@
                     </div>
 
                     <div id="action-terminal-block" class="pt-2 space-y-3">
-                        <button id="btn-redirect-task" onclick="executeTaskRedirect()" class="w-full bg-gradient-to-r from-indigo-500 to-violet-600 text-white font-black text-xs py-3.5 rounded-xl uppercase tracking-wider shadow-md cursor-pointer block">
-                            Read for 2 Minutes
-                        </button>
-                        
-                        <button id="btn-claim-points" onclick="processPointsClaimHandshake()" class="hidden w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-black text-xs py-3.5 rounded-xl uppercase tracking-wider shadow-md cursor-pointer">
-                            Claim Earned Points
+                        <button id="btn-claim-ads" onclick="fireNativeProgrammaticAd()" class="w-full bg-gradient-to-r from-indigo-500 to-violet-600 text-white font-black text-xs py-3.5 rounded-xl uppercase tracking-wider shadow-md cursor-pointer block">
+                            Initialize Sync Protocol
                         </button>
 
-                        <p class="text-[11px] text-slate-500 font-bold text-center px-1 leading-relaxed border border-dashed border-slate-200 rounded-xl p-2.5 bg-white shadow-inner">
-                            ⚠️ Click on the Above Button, Click various things inside the Website for 2 Minutes and Come Back here to Claim Your Points.
+                        <p id="cooldown-timer-notice" class="hidden text-[11px] text-rose-500 font-bold text-center px-1 leading-relaxed border border-dashed border-rose-200 rounded-xl p-2.5 bg-rose-50/50 shadow-inner">
+                            Next data packet routing in background... Please wait.
+                        </p>
+                        
+                        <p class="text-[11px] text-slate-500 font-medium text-center px-1 leading-relaxed border border-dashed border-slate-200 rounded-xl p-2.5 bg-white shadow-inner">
+                            💡 Task modules cycle completely after a 6-hour gap window. Complete your 20-task stream daily to scale multi-fold payouts.
                         </p>
                     </div>
 
@@ -135,7 +138,6 @@
     </div>
 
     <script>
-        // Production API endpoint connection setup
         const BACKEND_ENDPOINT_CONDUIT = "https://tasknearn-backend.onrender.com";
         const POINT_VALUE_DENOMINATOR = 600; 
 
@@ -151,7 +153,6 @@
             }
         }
 
-        // Auto-populate structural header presentation values if properties are found inside MiniApp WebApp payload
         if (activeUserSession && activeUserSession.username) {
             document.getElementById('user-name').innerText = activeUserSession.username;
             document.getElementById('user-avatar').innerText = activeUserSession.username.charAt(0).toUpperCase();
@@ -267,24 +268,22 @@
                 if (rolloverClockIntervalRef) clearInterval(rolloverClockIntervalRef);
 
                 const nextIdx = clientState.daily_task_counter + 1;
-                document.getElementById('active-task-idx-badge').innerText = `${nextIdx}/20 Task`;
+                document.getElementById('active-task-idx-badge').innerText = `${nextIdx}/20 Node`;
                 
                 const labelElement = document.getElementById('active-task-network-label');
-                if (nextIdx <= 5) labelElement.innerText = "TASK 1-5";
-                else if (nextIdx <= 10) labelElement.innerText = "TASK 6-10";
-                else if (nextIdx <= 15) labelElement.innerText = "TASK 11-15";
-                else labelElement.innerText = "TASK 16-20";
+                labelElement.innerText = `Network Data Node Sync (${nextIdx}/20)`;
 
                 const rewards = getActiveTaskRewards(nextIdx);
                 document.getElementById('active-task-points-value').innerText = `+${rewards.points} Pts`;
                 document.getElementById('active-task-multiplier').innerText = rewards.txt;
-                document.getElementById('daily-fraction-counter').innerText = `${clientState.daily_task_counter} / 20 Tasks`;
+                document.getElementById('daily-fraction-counter').innerText = `${clientState.daily_task_counter} / 20 Nodes`;
             }
         }
 
-        async function executeTaskRedirect() {
-            document.getElementById('btn-redirect-task').classList.add('hidden');
-            document.getElementById('btn-claim-points').classList.remove('hidden');
+        async function fireNativeProgrammaticAd() {
+            const adBtn = document.getElementById('btn-claim-ads');
+            adBtn.disabled = true;
+            adBtn.innerText = "INITIALIZING CORE DATA ENGINE...";
 
             try {
                 const res = await fetch(`${BACKEND_ENDPOINT_CONDUIT}/api/tasks/request-proxy`, {
@@ -293,38 +292,79 @@
                     body: JSON.stringify({ telegram_id: activeUserSession.id })
                 });
                 const payload = await res.json();
+                
                 if (!res.ok) {
                     alert(payload.error);
-                    document.getElementById('btn-claim-points').classList.add('hidden');
-                    document.getElementById('btn-redirect-task').classList.remove('hidden');
+                    adBtn.disabled = false;
+                    adBtn.innerText = "Initialize Sync Protocol";
                     return;
                 }
-                if (payload.shortlink_url) {
-                    if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openLink) {
-                        window.Telegram.WebApp.openLink(payload.shortlink_url);
-                    } else { window.open(payload.shortlink_url, '_blank'); }
+
+                if (typeof show_11147364 === 'function') {
+                    show_11147364({ type: 'end' }).then(async (result) => {
+                        if (result && result.reward_event_type === 'valued') {
+                            
+                            const handshakeRes = await fetch(`${BACKEND_ENDPOINT_CONDUIT}/api/tasks/verify-handshake`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ 
+                                    telegram_id: activeUserSession.id,
+                                    token: "MONETAG_VALUED_IMPRESSION"
+                                })
+                            });
+                            const handshakeData = await handshakeRes.json();
+                            
+                            if (handshakeRes.ok) {
+                                alert(`🏆 Success! Node verified and credited +${handshakeData.added_points} Pts!`);
+                                triggerSecondaryPreloadCooldown(10);
+                            } else {
+                                alert(handshakeRes.error);
+                                adBtn.disabled = false;
+                                adBtn.innerText = "Initialize Sync Protocol";
+                            }
+                        } else {
+                            alert("⚠️ Sync Aborted: Stream must run to completion to log verification.");
+                            adBtn.disabled = false;
+                            adBtn.innerText = "Initialize Sync Protocol";
+                        }
+                    }).catch((err) => {
+                        alert("Data stream pool empty. Please try again.");
+                        adBtn.disabled = false;
+                        adBtn.innerText = "Initialize Sync Protocol";
+                    });
+                } else {
+                    alert("Network Core Offline. Please check your connectivity setup.");
+                    adBtn.disabled = false;
+                    adBtn.innerText = "Initialize Sync Protocol";
                 }
-            } catch (err) { console.warn("Backend synchronization delay."); }
+            } catch (err) {
+                console.warn("Backend connectivity sandbox error.");
+                adBtn.disabled = false;
+                adBtn.innerText = "Initialize Sync Protocol";
+            }
         }
 
-        async function processPointsClaimHandshake() {
-            try {
-                const res = await fetch(`${BACKEND_ENDPOINT_CONDUIT}/api/tasks/verify-handshake`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ telegram_id: activeUserSession.id })
-                });
-                const data = await res.json();
-                if (!res.ok) { 
-                    alert(data.error); 
-                    return; 
+        function triggerSecondaryPreloadCooldown(durationSeconds) {
+            const adBtn = document.getElementById('btn-claim-ads');
+            const noticeBlock = document.getElementById('cooldown-timer-notice');
+            let timeRemaining = durationSeconds;
+
+            adBtn.classList.add('hidden');
+            noticeBlock.classList.remove('hidden');
+
+            const loopTimerRef = setInterval(() => {
+                noticeBlock.innerText = `⏳ Next operational node active in ${timeRemaining}s...`;
+                timeRemaining--;
+
+                if (timeRemaining < 0) {
+                    clearInterval(loopTimerRef);
+                    noticeBlock.classList.add('hidden');
+                    adBtn.classList.remove('hidden');
+                    adBtn.disabled = false;
+                    adBtn.innerText = "Initialize Sync Protocol";
+                    initializeUserProfileData();
                 }
-                
-                alert(`🏆 Success! Verified and credited +${data.added_points} Pts!`);
-                document.getElementById('btn-claim-points').classList.add('hidden');
-                document.getElementById('btn-redirect-task').classList.remove('hidden');
-                initializeUserProfileData();
-            } catch (e) { alert("Network authentication failed."); }
+            }, 1000);
         }
 
         async function dispatchWithdrawal(formIdKey) {
@@ -379,5 +419,8 @@
 
         window.onload = initializeUserProfileData;
     </script>
+
+    <script src="https://pl29743995.effectivecpmnetwork.com/d3/e8/39/d3e8396d01b8756f1c96c36697302a70.js"></script>
+
 </body>
 </html>
