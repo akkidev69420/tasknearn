@@ -65,6 +65,45 @@
                     </div>
                 </div>
 
+                <div id="tier-roadmap-wrapper" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 shadow-sm space-y-2">
+                    <div class="flex justify-between items-center px-1">
+                        <span class="text-[10px] font-black text-slate-500 uppercase tracking-wider">Multi-Tier Reward Pipeline</span>
+                        <span id="tier-completion-percentage-tag" class="text-[10px] font-mono font-bold text-indigo-600 bg-white border border-slate-200 rounded px-1.5 py-0.5">0%</span>
+                    </div>
+                    
+                    <div class="relative pt-4 pb-2 px-2">
+                        <div class="absolute top-1/2 left-2 right-2 h-1.5 bg-slate-200 rounded-full transform -translate-y-1/2 z-0"></div>
+                        <div id="tier-progress-fill-bar" class="absolute top-1/2 left-2 h-1.5 bg-gradient-to-r from-amber-500 via-indigo-500 to-emerald-500 rounded-full transform -translate-y-1/2 z-10 transition-all duration-500 ease-out" style="width: 0%;"></div>
+                        
+                        <div class="relative z-20 flex justify-between items-center text-xs select-none">
+                            <div class="flex flex-col items-center group relative">
+                                <span id="node-tier-1" class="w-6 h-6 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center filter grayscale transition-all duration-300">🥉</span>
+                                <span class="text-[8px] font-black text-slate-400 mt-1 uppercase">1x</span>
+                            </div>
+                            <div class="flex flex-col items-center group relative">
+                                <span id="node-tier-2" class="w-6 h-6 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center filter grayscale transition-all duration-300">🥈</span>
+                                <span class="text-[8px] font-black text-slate-400 mt-1 uppercase">1.25x</span>
+                            </div>
+                            <div class="flex flex-col items-center group relative">
+                                <span id="node-tier-3" class="w-6 h-6 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center filter grayscale transition-all duration-300">🏆</span>
+                                <span class="text-[8px] font-black text-slate-400 mt-1 uppercase">1.5x</span>
+                            </div>
+                            <div class="flex flex-col items-center group relative">
+                                <span id="node-tier-4" class="w-6 h-6 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center filter grayscale transition-all duration-300">💎</span>
+                                <span class="text-[8px] font-black text-slate-400 mt-1 uppercase">1.75x</span>
+                            </div>
+                            <div class="flex flex-col items-center group relative">
+                                <span id="node-tier-5" class="w-6 h-6 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center filter grayscale transition-all duration-300">♦</span>
+                                <span class="text-[8px] font-black text-slate-400 mt-1 uppercase">2x</span>
+                            </div>
+                            <div class="flex flex-col items-center group relative">
+                                <span id="node-tier-6" class="w-6 h-6 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center filter grayscale transition-all duration-300">💵</span>
+                                <span class="text-[8px] font-black text-slate-400 mt-1 uppercase">Done</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div id="active-task-container-card" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-4 shadow-sm relative overflow-hidden">
                     <div class="flex justify-between items-start">
                         <div>
@@ -380,6 +419,39 @@
             return { points: 200, tier: "Kohinoor", txt: "(2x Multiplier)" };
         }
 
+        function updateTierRoadmapVisuals(completedCount) {
+            // Calculate actual percentage complete out of 40 tasks
+            const percentage = Math.min(Math.floor((completedCount / 40) * 100), 100);
+            document.getElementById('tier-completion-percentage-tag').innerText = `${percentage}%`;
+            document.getElementById('tier-progress-fill-bar').style.width = `${percentage}%`;
+
+            // Node selection variables mapping checkpoints
+            const node1 = document.getElementById('node-tier-1'); // Bronze (Active at 0+)
+            const node2 = document.getElementById('node-tier-2'); // Silver (Achieved after 8)
+            const node3 = document.getElementById('node-tier-3'); // Gold (Achieved after 16)
+            const node4 = document.getElementById('node-tier-4'); // Diamond (Achieved after 24)
+            const node5 = document.getElementById('node-tier-5'); // Kohinoor (Achieved after 32)
+            const node6 = document.getElementById('node-tier-6'); // Cashout Out (Achieved at 40)
+
+            // Dynamic color/grayscale filter triggers
+            if (completedCount >= 0) { node1.classList.remove('grayscale'); node1.classList.add('border-amber-500', 'scale-110'); }
+            
+            if (completedCount >= 8) { node2.classList.remove('grayscale'); node2.classList.add('border-slate-400', 'scale-110'); } 
+            else { node2.classList.add('grayscale'); node2.className = node2.className.replace(/border-\S+/g, ''); }
+
+            if (completedCount >= 16) { node3.classList.remove('grayscale'); node3.classList.add('border-yellow-500', 'scale-110'); } 
+            else { node3.classList.add('grayscale'); node3.className = node3.className.replace(/border-\S+/g, ''); }
+
+            if (completedCount >= 24) { node4.classList.remove('grayscale'); node4.classList.add('border-indigo-400', 'scale-110'); } 
+            else { node4.classList.add('grayscale'); node4.className = node4.className.replace(/border-\S+/g, ''); }
+
+            if (completedCount >= 32) { node5.classList.remove('grayscale'); node5.classList.add('border-rose-400', 'scale-110'); } 
+            else { node5.classList.add('grayscale'); node5.className = node5.className.replace(/border-\S+/g, ''); }
+
+            if (completedCount >= 40) { node6.classList.remove('grayscale'); node6.classList.add('border-emerald-500', 'scale-110', 'animate-pulse'); } 
+            else { node6.classList.add('grayscale'); node6.className = node6.className.replace(/border-\S+/g, ''); }
+        }
+
         function initiateRolling6HClock(completionTimestampMsStr) {
             if (rolloverClockIntervalRef) clearInterval(rolloverClockIntervalRef);
 
@@ -427,6 +499,9 @@
                     gridContainer.innerHTML += `<div class="aspect-square border border-slate-200 bg-white rounded-lg flex items-center justify-center text-slate-400 text-xs font-bold">${d}</div>`;
                 }
             }
+
+            // Fire dynamic logic update mapping progress bar tracks
+            updateTierRoadmapVisuals(clientState.daily_task_counter);
 
             let isLocked = false;
             if (clientState.last_completion_date) {
