@@ -9,8 +9,15 @@
     
     <script src='//libtl.com/sdk.js' data-zone='11147364' data-sdk='show_11147364'></script>
     <script src='//libtl.com/sdk.js' data-zone='11147365' data-sdk='show_11147365'></script>
+    
     <script src='//libtl.com/sdk.js' data-zone='11157414' data-sdk='show_11157414'></script>
     <script src='//libtl.com/sdk.js' data-zone='11157415' data-sdk='show_11157415'></script>
+
+    <script src='//libtl.com/sdk.js' data-zone='11192471' data-sdk='show_11192471'></script>
+    <script src='//libtl.com/sdk.js' data-zone='11192472' data-sdk='show_11192472'></script>
+
+    <script src='//libtl.com/sdk.js' data-zone='11192476' data-sdk='show_11192476'></script>
+    <script src='//libtl.com/sdk.js' data-zone='11192477' data-sdk='show_11192477'></script>
 
     <style>
         body { 
@@ -79,9 +86,14 @@
                             Next data packet routing in background... Please wait.
                         </p>
                         
-                        <p class="text-[11px] text-slate-500 font-medium text-center px-1 leading-relaxed border border-dashed border-slate-200 rounded-xl p-2.5 bg-white shadow-inner">
-                            💡 Complete more than 40 Tasks to earn more Points. To get Points, wait 10 seconds in the website after tapping CLAIM POINTS.
-                        </p>
+                        <div class="text-[11px] text-slate-500 font-medium text-center px-1 leading-relaxed border border-dashed border-indigo-200 rounded-xl p-3 bg-indigo-50/20 shadow-xs space-y-1">
+                            <p class="font-bold text-indigo-600 uppercase tracking-wide flex items-center justify-center space-x-1">
+                                <span>⚡ SPEED RUN ACTIVE</span>
+                            </p>
+                            <p class="text-slate-600 font-medium">
+                                It takes less than <span class="font-bold text-slate-900">20 minutes</span> total to clear today's 40 tasks. Finish the run to secure your <span class="font-bold text-emerald-600">6,000 Points (₹10.00)</span> instant withdrawal threshold! Stay inside the ad for 10 seconds after tapping claim to verify rewards.
+                            </p>
+                        </div>
                     </div>
 
                     <div class="flex justify-between items-center text-[10px] text-slate-400 pt-1 border-t border-slate-200/60">
@@ -101,16 +113,18 @@
                     </div>
                 </div>
 
-                <div onclick="switchScreen('cpi-dashboard')" class="w-full bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 p-0.5 rounded-2xl shadow-md cursor-pointer animate-pulse active:scale-[0.99] transition-all mt-4">
-                    <div class="bg-slate-900 rounded-[14px] p-4 flex justify-between items-center">
-                        <div class="flex items-center space-x-3">
-                            <span class="text-2xl">🔥</span>
-                            <div>
-                                <h4 class="text-xs font-black text-white uppercase tracking-wider">CPAGrip Hot Offers Panel</h4>
-                                <p class="text-[10px] text-slate-400 font-bold mt-0.5">Install Mobile Apps & Earn Massive Rewards</p>
-                            </div>
-                        </div>
-                        <span class="text-white text-xs font-black bg-white/10 px-3 py-1.5 rounded-xl border border-white/20">EXPLORE -></span>
+                <div class="w-full bg-slate-900 text-white rounded-2xl p-5 text-center space-y-3 shadow-md border border-slate-800 mt-4">
+                    <div class="flex justify-center items-center space-x-1.5">
+                        <span class="text-xs">📢</span>
+                        <h4 class="text-[11px] font-black uppercase tracking-wider text-indigo-400">Official System Broadcast</h4>
+                    </div>
+                    <p class="text-[11px] text-slate-300 font-medium max-w-xs mx-auto leading-relaxed">
+                        To get daily updates about payouts and optimizations, join our Telegram Community Channel below:
+                    </p>
+                    <div class="pt-1">
+                        <button onclick="window.Telegram && window.Telegram.WebApp ? Telegram.WebApp.openLink('https://t.me/+yQp-kyrACPJhOTg1') : window.open('https://t.me/+yQp-kyrACPJhOTg1', '_blank')" class="w-full bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-600 hover:to-violet-700 text-white font-black text-xs py-3 rounded-xl uppercase tracking-widest shadow-md active:scale-[0.98] transition-all cursor-pointer">
+                            🚀 JOIN CHANNEL
+                        </button>
                     </div>
                 </div>
             </div>
@@ -137,7 +151,27 @@
                     <div class="space-y-2.5">
                         <input type="text" id="upi-input-name" placeholder="Enter Full Name" class="w-full bg-white border border-slate-200 focus:border-indigo-500 focus:outline-none rounded-xl px-3 py-2.5 text-xs transition-all">
                         <input type="text" id="upi-input-address" placeholder="username@bank" class="w-full bg-white border border-slate-200 focus:border-indigo-500 focus:outline-none rounded-xl px-3 py-2.5 text-xs transition-all">
-                        <input type="number" id="upi-input-amount" placeholder="Enter Amount in ₹" class="w-full bg-white border border-slate-200 focus:border-indigo-500 focus:outline-none rounded-xl px-3 py-2.5 text-xs transition-all">
+                        
+                        <div class="bg-white border border-slate-200/80 rounded-xl p-3 space-y-2.5">
+                            <span class="text-[10px] font-black uppercase text-slate-400 tracking-wider block">Quick Denomination Selection</span>
+                            <div class="grid grid-cols-3 gap-2">
+                                <label class="border border-slate-200 rounded-lg p-2.5 flex items-center justify-center space-x-2 bg-slate-50/50 cursor-pointer hover:bg-slate-100/70 transition-all">
+                                    <input type="checkbox" class="upi-chk w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" value="10" onclick="handleWalletCheckboxSelection(this, 'UPI')">
+                                    <span class="text-xs font-bold text-slate-700">₹10</span>
+                                </label>
+                                <label class="border border-slate-200 rounded-lg p-2.5 flex items-center justify-center space-x-2 bg-slate-50/50 cursor-pointer hover:bg-slate-100/70 transition-all">
+                                    <input type="checkbox" class="upi-chk w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" value="20" onclick="handleWalletCheckboxSelection(this, 'UPI')">
+                                    <span class="text-xs font-bold text-slate-700">₹20</span>
+                                </label>
+                                <label class="border border-slate-200 rounded-lg p-2.5 flex items-center justify-center space-x-2 bg-slate-50/50 cursor-pointer hover:bg-slate-100/70 transition-all">
+                                    <input type="checkbox" class="upi-chk w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" value="30" onclick="handleWalletCheckboxSelection(this, 'UPI')">
+                                    <span class="text-xs font-bold text-slate-700">₹30</span>
+                                </label>
+                            </div>
+                            <p id="upi-deduction-calculator-text" class="text-[10px] text-slate-400 font-semibold italic text-center pt-0.5">Select a box above to preview required point balance deduction.</p>
+                        </div>
+
+                        <input type="number" id="upi-input-amount" readonly placeholder="Amount in ₹ (Auto-Selected)" class="w-full bg-slate-100/80 font-bold border border-slate-200 text-slate-600 rounded-xl px-3 py-2.5 text-xs focus:outline-none">
                     </div>
                     <input type="hidden" id="upi-input-channel" value="UPI">
                     <button onclick="dispatchWithdrawal('UPI')" class="w-full bg-gradient-to-r from-indigo-500 to-violet-600 text-white font-black text-xs py-3 rounded-xl uppercase tracking-wider active:scale-[0.99] transition-all cursor-pointer mt-1 shadow-sm">Withdraw to UPI</button>
@@ -148,89 +182,41 @@
                     <div class="space-y-2.5">
                         <input type="text" id="gift-input-name" placeholder="Enter Full Name" class="w-full bg-white border border-slate-200 focus:border-emerald-500 focus:outline-none rounded-xl px-3 py-2.5 text-xs transition-all">
                         <input type="email" id="gift-input-address" placeholder="Enter Email Address" class="w-full bg-white border border-slate-200 focus:border-emerald-500 focus:outline-none rounded-xl px-3 py-2.5 text-xs transition-all">
-                        <input type="number" id="gift-input-amount" placeholder="Enter Card Amount" class="w-full bg-white border border-slate-200 focus:border-emerald-500 focus:outline-none rounded-xl px-3 py-2.5 text-xs transition-all">
+                        
+                        <div class="bg-white border border-slate-200/80 rounded-xl p-3 space-y-2.5">
+                            <span class="text-[10px] font-black uppercase text-slate-400 tracking-wider block">Quick Denomination Selection</span>
+                            <div class="grid grid-cols-3 gap-2">
+                                <label class="border border-slate-200 rounded-lg p-2.5 flex items-center justify-center space-x-2 bg-slate-50/50 cursor-pointer hover:bg-slate-100/70 transition-all">
+                                    <input type="checkbox" class="gift-chk w-4 h-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500" value="10" onclick="handleWalletCheckboxSelection(this, 'GIFT')">
+                                    <span class="text-xs font-bold text-slate-700">₹10</span>
+                                </label>
+                                <label class="border border-slate-200 rounded-lg p-2.5 flex items-center justify-center space-x-2 bg-slate-50/50 cursor-pointer hover:bg-slate-100/70 transition-all">
+                                    <input type="checkbox" class="gift-chk w-4 h-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500" value="20" onclick="handleWalletCheckboxSelection(this, 'GIFT')">
+                                    <span class="text-xs font-bold text-slate-700">₹20</span>
+                                </label>
+                                <label class="border border-slate-200 rounded-lg p-2.5 flex items-center justify-center space-x-2 bg-slate-50/50 cursor-pointer hover:bg-slate-100/70 transition-all">
+                                    <input type="checkbox" class="gift-chk w-4 h-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500" value="30" onclick="handleWalletCheckboxSelection(this, 'GIFT')">
+                                    <span class="text-xs font-bold text-slate-700">₹30</span>
+                                </label>
+                            </div>
+                            <p id="gift-deduction-calculator-text" class="text-[10px] text-slate-400 font-semibold italic text-center pt-0.5">Select a box above to preview required point balance deduction.</p>
+                        </div>
+
+                        <input type="number" id="gift-input-amount" readonly placeholder="Card Amount (Auto-Selected)" class="w-full bg-slate-100/80 font-bold border border-slate-200 text-slate-600 rounded-xl px-3 py-2.5 text-xs focus:outline-none">
                     </div>
                     <input type="hidden" id="gift-input-channel" value="GIFT">
                     <button onclick="dispatchWithdrawal('GIFT')" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-black text-xs py-3 rounded-xl uppercase tracking-wider active:scale-[0.99] transition-all cursor-pointer mt-1 shadow-sm">Request Gift Card</button>
                 </div>
 
-                <div class="w-full bg-slate-900 text-white rounded-2xl p-5 text-center space-y-3 shadow-md border border-slate-800 mt-6 mb-4">
-                    <div class="flex justify-center items-center space-x-1.5">
-                        <span class="text-xs">📢</span>
-                        <h4 class="text-[11px] font-black uppercase tracking-wider text-indigo-400">Official System Broadcast</h4>
+                <div class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-3 shadow-sm mb-4">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                        <h4 class="font-black text-xs text-slate-700 uppercase tracking-wider flex items-center">
+                            <span class="mr-1.5 text-sm">📜</span> Recent Transaction Ledger
+                        </h4>
+                        <span class="text-[9px] bg-slate-200/70 font-bold text-slate-500 px-2 py-0.5 rounded uppercase">Real-Time Sync</span>
                     </div>
-                    
-                    <p class="text-[11px] text-slate-300 font-medium max-w-xs mx-auto leading-relaxed">
-                        To get daily updates about payouts and optimizations, join our Telegram Community Channel below:
-                    </p>
-                    
-                    <div class="pt-1">
-                        <button onclick="window.Telegram && window.Telegram.WebApp ? Telegram.WebApp.openLink('https://t.me/+yQp-kyrACPJhOTg1') : window.open('https://t.me/+yQp-kyrACPJhOTg1', '_blank')" class="w-full bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-600 hover:to-violet-700 text-white font-black text-xs py-3 rounded-xl uppercase tracking-widest shadow-md active:scale-[0.98] transition-all cursor-pointer">
-                            🚀 JOIN CHANNEL
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div id="screen-cpi-dashboard" class="hidden space-y-4 bg-white animate-fadeIn">
-                <div class="w-full bg-slate-100 border border-slate-200 rounded-xl p-3 flex justify-between items-center">
-                    <button onclick="switchScreen('home')" class="text-xs font-black text-indigo-600 bg-white border border-slate-200 px-3 py-1.5 rounded-lg active:scale-95 transition-all"><- BACK</button>
-                    <span class="text-xs font-black text-slate-900 tracking-wider uppercase">🔥 HOT OFFERS</span>
-                    <div class="w-10"></div>
-                </div>
-
-                <div class="grid grid-cols-3 gap-1.5 p-1 bg-slate-100 rounded-xl border border-slate-200">
-                    <button onclick="shiftCpiTab('OFFERS')" id="cpi-tab-offers" class="py-2.5 text-[10px] font-black rounded-lg transition-all bg-white text-indigo-600 shadow-sm uppercase tracking-wider">Offers</button>
-                    <button onclick="shiftCpiTab('PENDING')" id="cpi-tab-pending" class="py-2.5 text-[10px] font-black rounded-lg transition-all text-slate-500 hover:text-slate-800 uppercase tracking-wider">Pending</button>
-                    <button onclick="shiftCpiTab('SUCCESS')" id="cpi-tab-success" class="py-2.5 text-[10px] font-black rounded-lg transition-all text-slate-500 hover:text-slate-800 uppercase tracking-wider">Success</button>
-                </div>
-
-                <div id="cpi-view-offers-block" class="space-y-4">
-                    <div class="w-full bg-indigo-50/70 border border-indigo-100 rounded-2xl p-4 space-y-2">
-                        <span class="text-[10px] text-indigo-600 font-black block tracking-widest uppercase">📋 INSTRUCTIONS</span>
-                        <ul class="text-[11px] text-slate-600 font-medium space-y-1.5 list-disc pl-4 leading-relaxed">
-                            <li>Tap <span class="font-bold text-slate-900">'START OFFER'</span> down below.</li>
-                            <li>You'll see an Ad payload. Install that target app and run it honestly for <span class="font-bold text-indigo-600">3-5 minutes</span>.</li>
-                            <li>Come back here, tap <span class="font-bold text-emerald-600">'CLAIM COINS'</span> to log your pending verification file.</li>
-                        </ul>
-                        <div class="bg-white border border-amber-200 rounded-xl p-3 text-[10px] text-amber-700 font-bold leading-relaxed shadow-inner mt-1">
-                            ⚠ NOTE: Rewards require valid installation telemetry tracking. Retain the app active for 3-5 minutes to let the verification pass successfully!
-                        </div>
-                    </div>
-
-                    <div id="cpi-active-offer-card" class="bg-slate-50 border border-slate-200 rounded-2xl p-5 text-center space-y-4 shadow-sm">
-                        <div id="cpi-card-empty-state" class="hidden py-6 text-slate-400 font-bold text-xs">
-                            🔄 Sifting inventory... Check back in a few moments for new tasks.
-                        </div>
-                        <div id="cpi-card-populated-state" class="space-y-3">
-                            <div>
-                                <span class="text-[10px] bg-amber-500 text-white font-black px-2 py-0.5 rounded uppercase tracking-wider">HOT BONUS NODE</span>
-                                <h3 id="cpi-offer-title" class="font-black text-sm text-slate-900 mt-1 tracking-tight">Loading Active Campaign...</h3>
-                                <p id="cpi-offer-desc" class="text-[11px] text-slate-400 font-medium mt-0.5">Install and complete validation checks.</p>
-                            </div>
-                            <div class="text-xl font-black text-emerald-600 flex items-center justify-center space-x-1">
-                                <span>🪙</span> <span id="cpi-offer-coins">0</span> <span class="text-xs text-slate-400 ml-1 font-bold">Pts</span>
-                            </div>
-                            <button id="btn-cpi-action-trigger" onclick="handleCpiActionSequence()" class="w-full bg-gradient-to-r from-indigo-500 to-violet-600 text-white font-black text-xs py-3.5 rounded-xl uppercase tracking-widest shadow-md active:scale-[0.98] transition-all cursor-pointer">
-                                START OFFER
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="cpi-view-history-block" class="hidden w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 shadow-sm">
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-xs table-fixed">
-                            <thead>
-                                <tr class="border-b border-slate-200 text-slate-400 font-bold uppercase tracking-wider text-[10px]">
-                                    <th class="pb-2 w-[15%]">ID</th>
-                                    <th class="pb-2 w-[55%]">OFFER</th>
-                                    <th class="pb-2 w-[30%] text-right">CREDIT / STATUS</th>
-                                </tr>
-                            </thead>
-                            <tbody id="cpi-history-table-body" class="divide-y divide-slate-100 font-medium text-slate-700">
-                            </tbody>
-                        </table>
+                    <div id="transaction-history-scroll-box" class="space-y-2 max-h-[180px] overflow-y-auto pr-1">
+                        <div class="text-center py-4 text-slate-400 font-medium text-[10px] italic">Loading sync transaction arrays...</div>
                     </div>
                 </div>
             </div>
@@ -249,14 +235,6 @@
         let clientState = { points: 0, current_day: 1, daily_task_counter: 0, last_completion_date: null };
         let rolloverClockIntervalRef = null;
         let activeUserSession = { id: 123456789, username: "GuestUser" };
-
-        let cpiDashboardState = {
-            currentTab: 'OFFERS',
-            buttonState: 'START',
-            loadedOffersArray: [],
-            activeOfferIndex: 0,
-            historyDataCache: { pending: [], successList: [] }
-        };
 
         let trackingState = {
             adClickTimestamp: 0,
@@ -284,7 +262,6 @@
             
             document.getElementById('screen-home').classList.add('hidden');
             document.getElementById('screen-wallet').classList.add('hidden');
-            document.getElementById('screen-cpi-dashboard').classList.add('hidden');
 
             homeBtn.className = "flex flex-col items-center space-y-1 text-slate-400 font-medium transition-all";
             walletBtn.className = "flex flex-col items-center space-y-1 text-slate-400 font-medium transition-all";
@@ -297,9 +274,7 @@
                 document.getElementById('screen-wallet').classList.remove('hidden');
                 walletBtn.className = "flex flex-col items-center space-y-1 text-indigo-600 font-black scale-105 transition-all";
                 document.getElementById('wallet-converted-cash').innerText = `₹${(clientState.points / POINT_VALUE_DENOMINATOR).toFixed(2)}`;
-            } else if (viewKey === 'cpi-dashboard') {
-                document.getElementById('screen-cpi-dashboard').classList.remove('hidden');
-                syncCpiDashboardEngine();
+                fetchAndRenderUserTransactionLedger();
             }
         }
 
@@ -308,6 +283,8 @@
             const giftTab = document.getElementById('tab-btn-gift');
             const upiForm = document.getElementById('form-channel-upi');
             const giftForm = document.getElementById('form-channel-gift');
+            
+            resetWalletInputsAndCheckboxes();
 
             if (targetChannel === 'UPI') {
                 upiTab.className = "py-2 text-xs font-black rounded-lg transition-all cursor-pointer bg-white text-indigo-600 shadow-sm";
@@ -322,145 +299,77 @@
             }
         }
 
-        function shiftCpiTab(targetTabKey) {
-            cpiDashboardState.currentTab = targetTabKey;
+        function handleWalletCheckboxSelection(checkboxElement, targetChannelKey) {
+            const inputSelector = targetChannelKey === 'UPI' ? 'upi-input-amount' : 'gift-input-amount';
+            const textSelector = targetChannelKey === 'UPI' ? 'upi-deduction-calculator-text' : 'gift-deduction-calculator-text';
+            const cssTargetClass = targetChannelKey === 'UPI' ? '.upi-chk' : '.gift-chk';
             
-            const btnOffers = document.getElementById('cpi-tab-offers');
-            const btnPending = document.getElementById('cpi-tab-pending');
-            const btnSuccess = document.getElementById('cpi-tab-success');
+            const targetInputElement = document.getElementById(inputSelector);
+            const targetTextElement = document.getElementById(textSelector);
 
-            btnOffers.className = btnPending.className = btnSuccess.className = "py-2.5 text-[10px] font-black rounded-lg transition-all text-slate-500 hover:text-slate-800 uppercase tracking-wider";
-
-            if (targetTabKey === 'OFFERS') {
-                btnOffers.className = "py-2.5 text-[10px] font-black rounded-lg transition-all bg-white text-indigo-600 shadow-sm uppercase tracking-wider";
-                document.getElementById('cpi-view-offers-block').classList.remove('hidden');
-                document.getElementById('cpi-view-history-block').classList.add('hidden');
-            } else if (targetTabKey === 'PENDING') {
-                btnPending.className = "py-2.5 text-[10px] font-black rounded-lg transition-all bg-white text-indigo-600 shadow-sm uppercase tracking-wider";
-                document.getElementById('cpi-view-offers-block').classList.add('hidden');
-                document.getElementById('cpi-view-history-block').classList.remove('hidden');
-                renderCpiHistoryTable(cpiDashboardState.historyDataCache.pending);
-            } else if (targetTabKey === 'SUCCESS') {
-                btnSuccess.className = "py-2.5 text-[10px] font-black rounded-lg transition-all bg-white text-indigo-600 shadow-sm uppercase tracking-wider";
-                document.getElementById('cpi-view-offers-block').classList.add('hidden');
-                document.getElementById('cpi-view-history-block').classList.remove('hidden');
-                renderCpiHistoryTable(cpiDashboardState.historyDataCache.successList);
-            }
-        }
-
-        async function syncCpiDashboardEngine() {
-            try {
-                const offersRes = await fetch(`${BACKEND_ENDPOINT_CONDUIT}/api/cpi/serve-offers?id=${activeUserSession.id}`);
-                const offersData = await offersRes.json();
-                cpiDashboardState.loadedOffersArray = offersData.offers || [];
-
-                const historyRes = await fetch(`${BACKEND_ENDPOINT_CONDUIT}/api/cpi/history?id=${activeUserSession.id}`);
-                cpiDashboardState.historyDataCache = await historyRes.json();
-
-                renderActiveOfferNodeCard();
-            } catch (err) {
-                console.error("CPI Engine Synchronization Interrupted:", err);
-            }
-        }
-
-        function renderActiveOfferNodeCard() {
-            const populatedBox = document.getElementById('cpi-card-populated-state');
-            const emptyBox = document.getElementById('cpi-card-empty-state');
-            const actionBtn = document.getElementById('btn-cpi-action-trigger');
-
-            if (cpiDashboardState.loadedOffersArray.length === 0) {
-                populatedBox.classList.add('hidden');
-                emptyBox.classList.remove('hidden');
-                return;
-            }
-
-            populatedBox.classList.remove('hidden');
-            emptyBox.classList.add('hidden');
-
-            const activeOffer = cpiDashboardState.loadedOffersArray[cpiDashboardState.activeOfferIndex];
-            document.getElementById('cpi-offer-title').innerText = activeOffer.title;
-            document.getElementById('cpi-offer-desc').innerText = activeOffer.description;
-            document.getElementById('cpi-offer-coins').innerText = activeOffer.coins;
-
-            if (cpiDashboardState.buttonState === 'START') {
-                actionBtn.innerText = "START OFFER";
-                actionBtn.className = "w-full bg-gradient-to-r from-indigo-500 to-violet-600 text-white font-black text-xs py-3.5 rounded-xl uppercase tracking-widest shadow-md active:scale-[0.98] transition-all cursor-pointer";
-            } else {
-                actionBtn.innerText = "CLAIM COINS";
-                actionBtn.className = "w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-black text-xs py-3.5 rounded-xl uppercase tracking-widest shadow-md active:scale-[0.98] transition-all cursor-pointer animate-bounce";
-            }
-        }
-
-        async function handleCpiActionSequence() {
-            const activeOffer = cpiDashboardState.loadedOffersArray[cpiDashboardState.activeOfferIndex];
-            if (!activeOffer) return;
-
-            const actionBtn = document.getElementById('btn-cpi-action-trigger');
-
-            if (cpiDashboardState.buttonState === 'START') {
-                actionBtn.disabled = true;
-                actionBtn.innerText = "OPENING SECURE CHANNELS...";
+            if (checkboxElement.checked) {
+                document.querySelectorAll(cssTargetClass).forEach(box => { if (box !== checkboxElement) box.checked = false; });
                 
-                try {
-                    await fetch(`${BACKEND_ENDPOINT_CONDUIT}/api/cpi/initialize-task`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            telegram_id: activeUserSession.id,
-                            offer_id: activeOffer.id,
-                            offer_name: activeOffer.title,
-                            coins: activeOffer.coins
-                        })
-                    });
+                const valRupees = parseInt(checkboxElement.value);
+                const computedPtsCost = valRupees * POINT_VALUE_DENOMINATOR;
+                
+                targetInputElement.value = valRupees;
+                targetTextElement.innerText = `🔥 ${computedPtsCost.toLocaleString('en-IN')} Points will be deducted from your account.`;
+                targetTextElement.className = "text-[10px] text-amber-600 font-bold tracking-wide text-center pt-0.5 animate-pulse";
+            } else {
+                targetInputElement.value = "";
+                targetTextElement.innerText = "Select a box above to preview required point balance deduction.";
+                targetTextElement.className = "text-[10px] text-slate-400 font-semibold italic text-center pt-0.5";
+            }
+        }
 
-                    if (window.Telegram && window.Telegram.WebApp) {
-                        window.Telegram.WebApp.openLink(activeOffer.link);
-                    } else {
-                        window.open(activeOffer.link, '_blank');
-                    }
+        function resetWalletInputsAndCheckboxes() {
+            document.querySelectorAll('.upi-chk, .gift-chk').forEach(box => box.checked = false);
+            document.getElementById('upi-input-amount').value = "";
+            document.getElementById('gift-input-amount').value = "";
+            document.getElementById('upi-deduction-calculator-text').innerText = "Select a box above to preview required point balance deduction.";
+            document.getElementById('upi-deduction-calculator-text').className = "text-[10px] text-slate-400 font-semibold italic text-center pt-0.5";
+            document.getElementById('gift-deduction-calculator-text').innerText = "Select a box above to preview required point balance deduction.";
+            document.getElementById('gift-deduction-calculator-text').className = "text-[10px] text-slate-400 font-semibold italic text-center pt-0.5";
+        }
 
-                    cpiDashboardState.buttonState = 'CLAIM';
-                    actionBtn.disabled = false;
-                    renderActiveOfferNodeCard();
-                } catch (e) {
-                    alert("Initialization error. Tap again.");
-                    actionBtn.disabled = false;
-                    renderActiveOfferNodeCard();
+        async function fetchAndRenderUserTransactionLedger() {
+            const targetHistoryBox = document.getElementById('transaction-history-scroll-box');
+            try {
+                const res = await fetch(`${BACKEND_ENDPOINT_CONDUIT}/api/wallet/history?telegram_id=${activeUserSession.id}`);
+                const historyData = await res.json();
+
+                if (!res.ok || !historyData.history || historyData.history.length === 0) {
+                    targetHistoryBox.innerHTML = `<div class="text-center py-5 text-slate-400 text-[10px] font-medium italic">No ledger transaction points mapped to profile yet.</div>`;
+                    return;
                 }
 
-            } else if (cpiDashboardState.buttonState === 'CLAIM') {
-                alert("Submission logged! Your task status is now updated to 'PENDING'. Payout credits clear automatically upon server validation validation execution.");
-                cpiDashboardState.buttonState = 'START';
-                await syncCpiDashboardEngine();
-                shiftCpiTab('PENDING');
+                targetHistoryBox.innerHTML = "";
+                historyData.history.forEach(tx => {
+                    const parsedTime = new Date(tx.created_at).toLocaleDateString('en-IN', {day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit'});
+                    const statusDotColor = tx.status === 'PENDING' ? 'bg-amber-400' : 'bg-emerald-500';
+                    
+                    targetHistoryBox.innerHTML += `
+                        <div class="w-full bg-white border border-slate-200 rounded-xl p-3 flex justify-between items-center text-xs shadow-2xs">
+                            <div class="space-y-0.5">
+                                <div class="flex items-center space-x-1.5">
+                                    <span class="font-bold text-slate-800">${tx.payment_channel === 'UPI' ? '⚡ UPI' : '🎮 Play Card'}</span>
+                                    <span class="text-[10px] text-slate-400 font-medium">₹${tx.amount_in_rupees}</span>
+                                </div>
+                                <span class="text-[9px] text-slate-400 block">${parsedTime}</span>
+                            </div>
+                            <div class="text-right flex items-center space-x-2">
+                                <span class="font-black text-rose-500 text-[11px] font-mono">-${tx.points_deducted.toLocaleString('en-IN')} Pts</span>
+                                <div class="flex items-center space-x-1 border border-slate-100 rounded-md px-1.5 py-0.5 bg-slate-50">
+                                    <span class="w-1.5 h-1.5 rounded-full ${statusDotColor}"></span>
+                                    <span class="text-[8px] font-black tracking-wider text-slate-500">${tx.status}</span>
+                                </div>
+                            </div>
+                        </div>`;
+                });
+            } catch (err) {
+                targetHistoryBox.innerHTML = `<div class="text-center py-5 text-rose-400 text-[10px] font-bold">Ledger profile connection drops.</div>`;
             }
-        }
-
-        function renderCpiHistoryTable(targetArrayDataset) {
-            const tableBody = document.getElementById('cpi-history-table-body');
-            tableBody.innerHTML = "";
-
-            if (!targetArrayDataset || targetArrayDataset.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="3" class="text-center py-4 text-slate-400">No entries recorded in this ledger block.</td></tr>`;
-                return;
-            }
-
-            targetArrayDataset.forEach(row => {
-                let badgeColors = "bg-amber-50 text-amber-600 border-amber-100";
-                if (row.status === 'SUCCESS') badgeColors = "bg-emerald-50 text-emerald-600 border-emerald-100";
-                if (row.status === 'REJECTED') badgeColors = "bg-rose-50 text-rose-600 border-rose-100";
-
-                tableBody.innerHTML += `
-                    <tr class="border-b border-slate-100">
-                        <td class="py-3 font-mono text-[10px] text-slate-400 truncate">${row.offer_id}</td>
-                        <td class="py-3 font-bold text-slate-800 truncate pr-2">${row.offer_name}</td>
-                        <td class="py-3 text-right space-y-1">
-                            <span class="text-xs font-black text-slate-900 block">🪙 ${row.coins}</span>
-                            <span class="inline-block text-[9px] font-bold px-1.5 py-0.5 border rounded uppercase tracking-wider ${badgeColors}">${row.status}</span>
-                        </td>
-                    </tr>
-                `;
-            });
         }
 
         function getActiveTaskRewards(taskNumber) {
@@ -541,14 +450,17 @@
                 
                 document.getElementById('active-task-idx-badge').innerText = `${rewards.tier.toUpperCase()} RANK • TASK ${nextIdx}/40`;
                 
-                // Programmatic labels based on modulo patterns
                 const labelElement = document.getElementById('active-task-network-label');
-                const patternModulo = clientState.daily_task_counter % 4;
                 
-                if (patternModulo === 0) labelElement.innerText = `🎥 Rewarded Interstitial Node A (${nextIdx}/40)`;
-                else if (patternModulo === 1) labelElement.innerText = `🚀 Rewarded Popup Node A (${nextIdx}/40)`;
-                else if (patternModulo === 2) labelElement.innerText = `🎥 Rewarded Interstitial Node B (${nextIdx}/40)`;
-                else if (patternModulo === 3) labelElement.innerText = `🚀 Rewarded Popup Node B (${nextIdx}/40)`;
+                let interfaceModulo = clientState.daily_task_counter % 8;
+                if (interfaceModulo === 0) labelElement.innerText = `🎥 Interstitial Node RI64 (${nextIdx}/40)`;
+                else if (interfaceModulo === 1) labelElement.innerText = `🚀 Popup Node RP65 (${nextIdx}/40)`;
+                else if (interfaceModulo === 2) labelElement.innerText = `🎥 Interstitial Node RI14 (${nextIdx}/40)`;
+                else if (interfaceModulo === 3) labelElement.innerText = `🚀 Popup Node RP15 (${nextIdx}/40)`;
+                else if (interfaceModulo === 4) labelElement.innerText = `🎥 Interstitial Node RI71 (${nextIdx}/40)`;
+                else if (interfaceModulo === 5) labelElement.innerText = `🚀 Popup Node RP72 (${nextIdx}/40)`;
+                else if (interfaceModulo === 6) labelElement.innerText = `🎥 Interstitial Node RI76 (${nextIdx}/40)`;
+                else if (interfaceModulo === 7) labelElement.innerText = `🚀 Popup Node RP77 (${nextIdx}/40)`;
 
                 document.getElementById('active-task-points-value').innerText = `+${rewards.points} Pts`;
                 document.getElementById('active-task-multiplier').innerText = rewards.txt;
@@ -635,32 +547,47 @@
                 trackingState.isWaitingForClaim = true;
 
                 const adConfigOptions = { ymid: activeUserSession.id.toString() };
-                const corePatternIndex = clientState.daily_task_counter % 4;
+                const patternIndex8 = clientState.daily_task_counter % 8;
 
-                // 4-WAY AD ROTATION ENGINE EXECUTION
-                if (corePatternIndex === 0) {
-                    // Task 1, 5, 9, 13... -> RI64 (11147364)
-                    if (typeof show_11147364 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
-                    trackingState.activeVerificationToken = "MONETAG_RI64_HANDSHAKE";
-                    show_11147364(adConfigOptions).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
-
-                } else if (corePatternIndex === 1) {
-                    // Task 2, 6, 10, 14... -> RP65 (11147365)
-                    if (typeof show_11147365 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
-                    trackingState.activeVerificationToken = "MONETAG_RP65_HANDSHAKE";
-                    show_11147365('pop', adConfigOptions).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
-
-                } else if (corePatternIndex === 2) {
-                    // Task 3, 7, 11, 15... -> RI14 (11157414)
+                if (patternIndex8 === 0) {
                     if (typeof show_11157414 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
-                    trackingState.activeVerificationToken = "MONETAG_RI14_HANDSHAKE";
+                    trackingState.activeVerificationToken = "MONETAG_RI64_HANDSHAKE";
                     show_11157414(adConfigOptions).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
 
-                } else if (corePatternIndex === 3) {
-                    // Task 4, 8, 12, 16... -> RP15 (11157415)
+                } else if (patternIndex8 === 1) {
                     if (typeof show_11157415 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
-                    trackingState.activeVerificationToken = "MONETAG_RP15_HANDSHAKE";
+                    trackingState.activeVerificationToken = "MONETAG_RP65_HANDSHAKE";
                     show_11157415('pop', adConfigOptions).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
+
+                } else if (patternIndex8 === 2) {
+                    if (typeof show_11147364 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
+                    trackingState.activeVerificationToken = "MONETAG_RI14_HANDSHAKE";
+                    show_11147364(adConfigOptions).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
+
+                } else if (patternIndex8 === 3) {
+                    if (typeof show_11147365 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
+                    trackingState.activeVerificationToken = "MONETAG_RP15_HANDSHAKE";
+                    show_11147365('pop', adConfigOptions).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
+
+                } else if (patternIndex8 === 4) {
+                    if (typeof show_11192471 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
+                    trackingState.activeVerificationToken = "MONETAG_RI71_HANDSHAKE";
+                    show_11192471(adConfigOptions).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
+
+                } else if (patternIndex8 === 5) {
+                    if (typeof show_11192472 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
+                    trackingState.activeVerificationToken = "MONETAG_RP72_HANDSHAKE";
+                    show_11192472('pop', adConfigOptions).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
+
+                } else if (patternIndex8 === 6) {
+                    if (typeof show_11192476 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
+                    trackingState.activeVerificationToken = "MONETAG_RI76_HANDSHAKE";
+                    show_11192476(adConfigOptions).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
+
+                } else if (patternIndex8 === 7) {
+                    if (typeof show_11192477 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
+                    trackingState.activeVerificationToken = "MONETAG_RP77_HANDSHAKE";
+                    show_11192477('pop', adConfigOptions).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
                 }
 
             } catch (err) {
@@ -714,7 +641,7 @@
             }
 
             if (!name || !addr || isNaN(amt) || amt <= 0) { 
-                alert("Please input complete payment channel forms."); 
+                alert("Please complete the payout forms and select a checkbox amount."); 
                 return; 
             }
             
@@ -733,10 +660,10 @@
                 const data = await res.json();
                 if (!res.ok) { alert(data.error); return; }
 
-                alert(`✅ Withdrawal request logged successfully for ₹${amt}!`);
-                if (formIdKey === 'UPI') document.getElementById('upi-input-amount').value = "";
-                else document.getElementById('gift-input-amount').value = "";
+                alert(`✅ Withdrawal logged successfully for ₹${amt}!`);
+                resetWalletInputsAndCheckboxes();
                 initializeUserProfileData();
+                fetchAndRenderUserTransactionLedger();
             } catch (err) { 
                 alert("Transaction dispatch interrupted."); 
             }
