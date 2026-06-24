@@ -101,7 +101,7 @@
                     <div class="flex justify-between items-start">
                         <div>
                             <span id="active-task-idx-badge" class="text-[10px] bg-indigo-600 text-white font-black px-2 py-0.5 rounded uppercase tracking-wider">BRONZE RANK • TASK 1/40</span>
-                            <h2 class="font-black text-sm text-slate-900 mt-1.5 tracking-tight" id="active-task-network-label">Initializing System Node...</h2>
+                            <h2 class="font-black text-sm text-slate-900 mt-1.5 tracking-tight" id="active-task-network-label">TASK 1</h2>
                         </div>
                         <div class="text-right">
                             <span id="active-task-points-value" class="text-sm font-black text-emerald-600 block">+100 Pts</span>
@@ -514,17 +514,8 @@
                 
                 document.getElementById('active-task-idx-badge').innerText = `${rewards.tier.toUpperCase()} RANK • TASK ${nextIdx}/40`;
                 
-                const labelElement = document.getElementById('active-task-network-label');
-                
-                let interfaceModulo = clientState.daily_task_counter % 8;
-                if (interfaceModulo === 0) labelElement.innerText = `🎥 Interstitial Node RI64 (${nextIdx}/40)`;
-                else if (interfaceModulo === 1) labelElement.innerText = `🚀 Popup Node RP65 (${nextIdx}/40)`;
-                else if (interfaceModulo === 2) labelElement.innerText = `🎥 Interstitial Node RI14 (${nextIdx}/40)`;
-                else if (interfaceModulo === 3) labelElement.innerText = `🚀 Popup Node RP15 (${nextIdx}/40)`;
-                else if (interfaceModulo === 4) labelElement.innerText = `🎥 Interstitial Node RI71 (${nextIdx}/40)`;
-                else if (interfaceModulo === 5) labelElement.innerText = `🚀 Popup Node RP72 (${nextIdx}/40)`;
-                else if (interfaceModulo === 6) labelElement.innerText = `🎥 Interstitial Node RI76 (${nextIdx}/40)`;
-                else if (interfaceModulo === 7) labelElement.innerText = `🚀 Popup Node RP77 (${nextIdx}/40)`;
+                // Clean Simplified Task Labels without internal system naming bloat
+                document.getElementById('active-task-network-label').innerText = `TASK ${nextIdx}`;
 
                 document.getElementById('active-task-points-value').innerText = `+${rewards.points} Pts`;
                 document.getElementById('active-task-multiplier').innerText = rewards.txt;
@@ -578,9 +569,10 @@
                 const elasticSecondsPassed = Math.floor((Date.now() - trackingState.adClickTimestamp) / 1000);
                 const minimumRequiredTime = 10; 
                 
+                // Dynamic Exploit Protection Countdown Patch
                 if (elasticSecondsPassed < minimumRequiredTime) {
                     let dynamicWaitRemainder = minimumRequiredTime - elasticSecondsPassed;
-                    alert(`Wait in the site for more ${dynamicWaitRemainder} seconds to secure reward handshake completion.`);
+                    alert(`Wait in the website for more ${dynamicWaitRemainder} seconds to earn points.`);
                     return;
                 }
 
