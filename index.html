@@ -7,17 +7,10 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     
-    <script src='//libtl.com/sdk.js' data-zone='11147364' data-sdk='show_11147364'></script>
-    <script src='//libtl.com/sdk.js' data-zone='11147365' data-sdk='show_11147365'></script>
-    
     <script src='//libtl.com/sdk.js' data-zone='11157414' data-sdk='show_11157414'></script>
-    <script src='//libtl.com/sdk.js' data-zone='11157415' data-sdk='show_11157415'></script>
-
+    <script src='//libtl.com/sdk.js' data-zone='11147364' data-sdk='show_11147364'></script>
     <script src='//libtl.com/sdk.js' data-zone='11192471' data-sdk='show_11192471'></script>
-    <script src='//libtl.com/sdk.js' data-zone='11192472' data-sdk='show_11192472'></script>
-
     <script src='//libtl.com/sdk.js' data-zone='11192476' data-sdk='show_11192476'></script>
-    <script src='//libtl.com/sdk.js' data-zone='11192477' data-sdk='show_11192477'></script>
 
     <style>
         body { 
@@ -108,7 +101,7 @@
                     <div class="flex justify-between items-start">
                         <div>
                             <span id="active-task-idx-badge" class="text-[10px] bg-indigo-600 text-white font-black px-2 py-0.5 rounded uppercase tracking-wider">BRONZE RANK • TASK 1/40</span>
-                            <h2 class="font-black text-sm text-slate-900 mt-1.5 tracking-tight" id="active-task-network-label">Initializing Task...</h2>
+                            <h2 class="font-black text-sm text-slate-900 mt-1.5 tracking-tight" id="active-task-network-label">Initializing System Node...</h2>
                         </div>
                         <div class="text-right">
                             <span id="active-task-points-value" class="text-sm font-black text-emerald-600 block">+100 Pts</span>
@@ -420,20 +413,17 @@
         }
 
         function updateTierRoadmapVisuals(completedCount) {
-            // Calculate actual percentage complete out of 40 tasks
             const percentage = Math.min(Math.floor((completedCount / 40) * 100), 100);
             document.getElementById('tier-completion-percentage-tag').innerText = `${percentage}%`;
             document.getElementById('tier-progress-fill-bar').style.width = `${percentage}%`;
 
-            // Node selection variables mapping checkpoints
-            const node1 = document.getElementById('node-tier-1'); // Bronze (Active at 0+)
-            const node2 = document.getElementById('node-tier-2'); // Silver (Achieved after 8)
-            const node3 = document.getElementById('node-tier-3'); // Gold (Achieved after 16)
-            const node4 = document.getElementById('node-tier-4'); // Diamond (Achieved after 24)
-            const node5 = document.getElementById('node-tier-5'); // Kohinoor (Achieved after 32)
-            const node6 = document.getElementById('node-tier-6'); // Cashout Out (Achieved at 40)
+            const node1 = document.getElementById('node-tier-1');
+            const node2 = document.getElementById('node-tier-2');
+            const node3 = document.getElementById('node-tier-3');
+            const node4 = document.getElementById('node-tier-4');
+            const node5 = document.getElementById('node-tier-5');
+            const node6 = document.getElementById('node-tier-6');
 
-            // Dynamic color/grayscale filter triggers
             if (completedCount >= 0) { node1.classList.remove('grayscale'); node1.classList.add('border-amber-500', 'scale-110'); }
             
             if (completedCount >= 8) { node2.classList.remove('grayscale'); node2.classList.add('border-slate-400', 'scale-110'); } 
@@ -500,7 +490,6 @@
                 }
             }
 
-            // Fire dynamic logic update mapping progress bar tracks
             updateTierRoadmapVisuals(clientState.daily_task_counter);
 
             let isLocked = false;
@@ -528,14 +517,14 @@
                 const labelElement = document.getElementById('active-task-network-label');
                 
                 let interfaceModulo = clientState.daily_task_counter % 8;
-                if (interfaceModulo === 0) labelElement.innerText = `🎥 TASK 1 (${nextIdx}/40)`;
-                else if (interfaceModulo === 1) labelElement.innerText = `🚀 TASK 2 (${nextIdx}/40)`;
-                else if (interfaceModulo === 2) labelElement.innerText = `🎥 TASK 3 (${nextIdx}/40)`;
-                else if (interfaceModulo === 3) labelElement.innerText = `🚀 TASK 4 (${nextIdx}/40)`;
-                else if (interfaceModulo === 4) labelElement.innerText = `🎥 TASK 5 (${nextIdx}/40)`;
-                else if (interfaceModulo === 5) labelElement.innerText = `🚀 TASK 6 (${nextIdx}/40)`;
-                else if (interfaceModulo === 6) labelElement.innerText = `🎥 TASK 7 (${nextIdx}/40)`;
-                else if (interfaceModulo === 7) labelElement.innerText = `🚀 TASK 8 (${nextIdx}/40)`;
+                if (interfaceModulo === 0) labelElement.innerText = `🎥 Interstitial Node RI64 (${nextIdx}/40)`;
+                else if (interfaceModulo === 1) labelElement.innerText = `🚀 Popup Node RP65 (${nextIdx}/40)`;
+                else if (interfaceModulo === 2) labelElement.innerText = `🎥 Interstitial Node RI14 (${nextIdx}/40)`;
+                else if (interfaceModulo === 3) labelElement.innerText = `🚀 Popup Node RP15 (${nextIdx}/40)`;
+                else if (interfaceModulo === 4) labelElement.innerText = `🎥 Interstitial Node RI71 (${nextIdx}/40)`;
+                else if (interfaceModulo === 5) labelElement.innerText = `🚀 Popup Node RP72 (${nextIdx}/40)`;
+                else if (interfaceModulo === 6) labelElement.innerText = `🎥 Interstitial Node RI76 (${nextIdx}/40)`;
+                else if (interfaceModulo === 7) labelElement.innerText = `🚀 Popup Node RP77 (${nextIdx}/40)`;
 
                 document.getElementById('active-task-points-value').innerText = `+${rewards.points} Pts`;
                 document.getElementById('active-task-multiplier').innerText = rewards.txt;
@@ -621,19 +610,19 @@
                 trackingState.adClickTimestamp = Date.now();
                 trackingState.isWaitingForClaim = true;
 
-                // Restructure options block cleanly to fulfill official SDK signatures
                 const baseAdOptions = { ymid: activeUserSession.id.toString() };
                 const patternIndex8 = clientState.daily_task_counter % 8;
 
+                // Universal Parent Routing Core Engine Map
                 if (patternIndex8 === 0) {
                     if (typeof show_11157414 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
                     trackingState.activeVerificationToken = "MONETAG_RI64_HANDSHAKE";
                     show_11157414({ type: 'end', ...baseAdOptions }).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
 
                 } else if (patternIndex8 === 1) {
-                    if (typeof show_11157415 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
+                    if (typeof show_11157414 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
                     trackingState.activeVerificationToken = "MONETAG_RP65_HANDSHAKE";
-                    show_11157415({ type: 'pop', ...baseAdOptions }).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
+                    show_11157414({ type: 'pop', ...baseAdOptions }).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
 
                 } else if (patternIndex8 === 2) {
                     if (typeof show_11147364 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
@@ -641,9 +630,9 @@
                     show_11147364({ type: 'end', ...baseAdOptions }).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
 
                 } else if (patternIndex8 === 3) {
-                    if (typeof show_11147365 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
+                    if (typeof show_11147364 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
                     trackingState.activeVerificationToken = "MONETAG_RP15_HANDSHAKE";
-                    show_11147365({ type: 'pop', ...baseAdOptions }).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
+                    show_11147364({ type: 'pop', ...baseAdOptions }).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
 
                 } else if (patternIndex8 === 4) {
                     if (typeof show_11192471 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
@@ -651,9 +640,9 @@
                     show_11192471({ type: 'end', ...baseAdOptions }).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
 
                 } else if (patternIndex8 === 5) {
-                    if (typeof show_11192472 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
+                    if (typeof show_11192471 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
                     trackingState.activeVerificationToken = "MONETAG_RP72_HANDSHAKE";
-                    show_11192472({ type: 'pop', ...baseAdOptions }).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
+                    show_11192471({ type: 'pop', ...baseAdOptions }).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
 
                 } else if (patternIndex8 === 6) {
                     if (typeof show_11192476 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
@@ -661,10 +650,9 @@
                     show_11192476({ type: 'end', ...baseAdOptions }).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
 
                 } else if (patternIndex8 === 7) {
-                    if (typeof show_11192477 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
+                    if (typeof show_11192476 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
                     trackingState.activeVerificationToken = "MONETAG_RP77_HANDSHAKE";
-                    // Correcting Task 8 signature context mapping to prevent silent crashes
-                    show_11192477({ type: 'pop', ...baseAdOptions }).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
+                    show_11192476({ type: 'pop', ...baseAdOptions }).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
                 }
 
             } catch (err) {
