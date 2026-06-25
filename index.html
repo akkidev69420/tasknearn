@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>TaskNEarn Pro</title>
+    <title>ReadNEarn Pro</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     
-    <script src='//libtl.com/sdk.js' data-zone='11157414' data-sdk='show_11157414'></script>
-    <script src='//libtl.com/sdk.js' data-zone='11147364' data-sdk='show_11147364'></script>
-    <script src='//libtl.com/sdk.js' data-zone='11192471' data-sdk='show_11192471'></script>
-    <script src='//libtl.com/sdk.js' data-zone='11192476' data-sdk='show_11192476'></script>
+    <script src='//libtl.com/sdk.js' data-zone='11147365' data-sdk='show_11147365'></script>
+    <script src='//libtl.com/sdk.js' data-zone='11157415' data-sdk='show_11157415'></script>
+    <script src='//libtl.com/sdk.js' data-zone='11192472' data-sdk='show_11192472'></script>
+    <script src='//libtl.com/sdk.js' data-zone='11192477' data-sdk='show_11192477'></script>
 
     <style>
         body { 
@@ -28,11 +28,11 @@
         
         <header class="w-full grid grid-cols-3 items-center bg-slate-50 border border-slate-200 rounded-2xl p-4 mb-4 sticky top-2 z-50 shadow-sm">
             <div class="flex items-center space-x-2 justify-self-start">
-                <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-indigo-500 to-violet-600 flex items-center justify-center font-black text-xs text-white shadow-sm" id="user-avatar">T</div>
+                <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-indigo-500 to-violet-600 flex items-center justify-center font-black text-xs text-white shadow-sm" id="user-avatar">R</div>
                 <div class="text-xs font-bold text-slate-900 truncate max-w-[70px]" id="user-name">Loading...</div>
             </div>
             <div class="text-center justify-self-center">
-                <span class="text-sm font-black text-indigo-600 tracking-tight uppercase">TaskNEarn</span>
+                <span class="text-sm font-black text-indigo-600 tracking-tight uppercase">ReadNEarn</span>
             </div>
             <div class="bg-white border border-slate-200 px-2.5 py-1.5 rounded-xl flex items-center space-x-1.5 shadow-sm justify-self-end">
                 <span class="text-amber-500 text-xs animate-bounce">🪙</span>
@@ -54,13 +54,13 @@
                     </div>
                     <div class="grid grid-cols-7 gap-2" id="streak-grid-row"></div>
                     <div class="w-full bg-white rounded-xl p-2.5 text-center border border-slate-200/60">
-                        <p id="streak-hint-text" class="text-[10px] text-slate-500 font-medium">Clear today's 40 tasks completely to advance your streak calendar.</p>
+                        <p id="streak-hint-text" class="text-[10px] text-slate-500 font-medium">Clear today's 20 tasks completely to advance your streak calendar.</p>
                     </div>
                 </div>
 
                 <div id="tier-roadmap-wrapper" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 shadow-sm space-y-2">
                     <div class="flex justify-between items-center px-1">
-                        <span class="text-[10px] font-black text-slate-500 uppercase tracking-wider">Multi-Tier Reward Pipeline</span>
+                        <span class="text-[10px] font-black text-slate-500 uppercase tracking-wider">Multi-Tier Reward Pipeline (20 Tasks)</span>
                         <span id="tier-completion-percentage-tag" class="text-[10px] font-mono font-bold text-indigo-600 bg-white border border-slate-200 rounded px-1.5 py-0.5">0%</span>
                     </div>
                     
@@ -69,30 +69,12 @@
                         <div id="tier-progress-fill-bar" class="absolute top-1/2 left-2 h-1.5 bg-gradient-to-r from-amber-500 via-indigo-500 to-emerald-500 rounded-full transform -translate-y-1/2 z-10 transition-all duration-500 ease-out" style="width: 0%;"></div>
                         
                         <div class="relative z-20 flex justify-between items-center text-xs select-none">
-                            <div class="flex flex-col items-center group relative">
-                                <span id="node-tier-1" class="w-6 h-6 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center filter grayscale transition-all duration-300">🥉</span>
-                                <span class="text-[8px] font-black text-slate-400 mt-1 uppercase">1x</span>
-                            </div>
-                            <div class="flex flex-col items-center group relative">
-                                <span id="node-tier-2" class="w-6 h-6 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center filter grayscale transition-all duration-300">🥈</span>
-                                <span class="text-[8px] font-black text-slate-400 mt-1 uppercase">1.25x</span>
-                            </div>
-                            <div class="flex flex-col items-center group relative">
-                                <span id="node-tier-3" class="w-6 h-6 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center filter grayscale transition-all duration-300">🏆</span>
-                                <span class="text-[8px] font-black text-slate-400 mt-1 uppercase">1.5x</span>
-                            </div>
-                            <div class="flex flex-col items-center group relative">
-                                <span id="node-tier-4" class="w-6 h-6 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center filter grayscale transition-all duration-300">💎</span>
-                                <span class="text-[8px] font-black text-slate-400 mt-1 uppercase">1.75x</span>
-                            </div>
-                            <div class="flex flex-col items-center group relative">
-                                <span id="node-tier-5" class="w-6 h-6 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center filter grayscale transition-all duration-300">♦</span>
-                                <span class="text-[8px] font-black text-slate-400 mt-1 uppercase">2x</span>
-                            </div>
-                            <div class="flex flex-col items-center group relative">
-                                <span id="node-tier-6" class="w-6 h-6 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center filter grayscale transition-all duration-300">💵</span>
-                                <span class="text-[8px] font-black text-slate-400 mt-1 uppercase">Done</span>
-                            </div>
+                            <div class="flex flex-col items-center"><span id="node-tier-1" class="w-6 h-6 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center filter grayscale transition-all duration-300">🥉</span><span class="text-[8px] font-black text-slate-400 mt-1 uppercase">T1</span></div>
+                            <div class="flex flex-col items-center"><span id="node-tier-2" class="w-6 h-6 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center filter grayscale transition-all duration-300">🥈</span><span class="text-[8px] font-black text-slate-400 mt-1 uppercase">T2</span></div>
+                            <div class="flex flex-col items-center"><span id="node-tier-3" class="w-6 h-6 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center filter grayscale transition-all duration-300">🏆</span><span class="text-[8px] font-black text-slate-400 mt-1 uppercase">T3</span></div>
+                            <div class="flex flex-col items-center"><span id="node-tier-4" class="w-6 h-6 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center filter grayscale transition-all duration-300">💎</span><span class="text-[8px] font-black text-slate-400 mt-1 uppercase">T4</span></div>
+                            <div class="flex flex-col items-center"><span id="node-tier-5" class="w-6 h-6 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center filter grayscale transition-all duration-300">♦</span><span class="text-[8px] font-black text-slate-400 mt-1 uppercase">T5</span></div>
+                            <div class="flex flex-col items-center"><span id="node-tier-6" class="w-6 h-6 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center filter grayscale transition-all duration-300">💵</span><span class="text-[8px] font-black text-slate-400 mt-1 uppercase">End</span></div>
                         </div>
                     </div>
                 </div>
@@ -100,63 +82,50 @@
                 <div id="active-task-container-card" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-4 shadow-sm relative overflow-hidden">
                     <div class="flex justify-between items-start">
                         <div>
-                            <span id="active-task-idx-badge" class="text-[10px] bg-indigo-600 text-white font-black px-2 py-0.5 rounded uppercase tracking-wider">BRONZE RANK • TASK 1/40</span>
-                            <h2 class="font-black text-sm text-slate-900 mt-1.5 tracking-tight" id="active-task-network-label">TASK 1</h2>
+                            <span id="active-task-idx-badge" class="text-[10px] bg-indigo-600 text-white font-black px-2 py-0.5 rounded uppercase tracking-wider">LOADING...</span>
+                            <h2 class="font-black text-sm text-slate-900 mt-1.5 tracking-tight" id="active-task-network-label">TASK PROCESSOR</h2>
                         </div>
                         <div class="text-right">
-                            <span id="active-task-points-value" class="text-sm font-black text-emerald-600 block">+100 Pts</span>
-                            <span id="active-task-multiplier" class="text-[9px] font-bold text-slate-400 uppercase block">(1x Multiplier)</span>
+                            <span id="active-task-points-value" class="text-sm font-black text-emerald-600 block">+0 Pts</span>
+                            <span id="active-task-multiplier" class="text-[9px] font-bold text-slate-400 uppercase block">(1x)</span>
                         </div>
                     </div>
 
                     <div id="action-terminal-block" class="pt-2 space-y-3">
-                        <button id="btn-claim-ads" onclick="fireNativeProgrammaticAd()" class="w-full bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-600 hover:to-violet-700 text-white font-black text-xs py-3.5 rounded-xl uppercase tracking-wider shadow-md transition-all active:scale-[0.98] cursor-pointer block">
+                        <button id="btn-claim-ads" onclick="executeTaskActionPipeline()" class="w-full bg-gradient-to-r from-indigo-500 to-violet-600 text-white font-black text-xs py-3.5 rounded-xl uppercase tracking-wider shadow-md transition-all active:scale-[0.98] cursor-pointer block">
                             CLAIM POINTS
                         </button>
-
-                        <p id="cooldown-timer-notice" class="hidden text-[11px] text-rose-500 font-bold text-center px-1 leading-relaxed border border-dashed border-rose-200 rounded-xl p-2.5 bg-rose-50/50 shadow-inner">
-                            Next data packet routing in background... Please wait.
-                        </p>
-                        
-                        <div class="text-[11px] text-slate-500 font-medium text-center px-1 leading-relaxed border border-dashed border-indigo-200 rounded-xl p-3 bg-indigo-50/20 shadow-xs space-y-1">
-                            <p class="font-bold text-indigo-600 uppercase tracking-wide flex items-center justify-center space-x-1">
-                                <span>⚡ SPEED RUN ACTIVE</span>
-                            </p>
-                            <p class="text-slate-600 font-medium">
-                                It takes less than <span class="font-bold text-slate-900">20 minutes</span> total to clear today's 40 tasks. Finish the run to secure your <span class="font-bold text-emerald-600">6,000 Points (₹10.00)</span> instant withdrawal threshold! Stay inside the ad for 10 seconds after tapping claim to verify rewards.
-                            </p>
-                        </div>
+                        <p id="cooldown-timer-notice" class="hidden text-[11px] text-rose-500 font-bold text-center px-1 leading-relaxed border border-dashed border-rose-200 rounded-xl p-2.5 bg-rose-50/50 shadow-inner"></p>
                     </div>
 
                     <div class="flex justify-between items-center text-[10px] text-slate-400 pt-1 border-t border-slate-200/60">
                         <span>Daily Completion Loop:</span>
-                        <span id="daily-fraction-counter" class="font-bold text-slate-700">0 / 40 TASKS COMPLETED</span>
+                        <span id="daily-fraction-counter" class="font-bold text-slate-700">0 / 20 TASKS COMPLETED</span>
                     </div>
                 </div>
 
                 <div id="all-tasks-completed-wall" class="hidden w-full bg-slate-50 border border-slate-200 rounded-2xl p-6 text-center space-y-3 shadow-sm">
                     <span class="text-3xl block animate-bounce">⏳</span>
-                    <h3 class="font-black text-sm text-slate-900 uppercase tracking-wide">Rolling Lockout Active</h3>
-                    <p class="text-xs text-slate-500 max-w-xs mx-auto leading-relaxed">You've successfully completed all 40 of your tasks. The next batch will unlock exactly 6 hours after your last completion.</p>
+                    <h3 class="font-black text-sm text-slate-900 uppercase tracking-wide">Next Loop Preparing</h3>
+                    <p class="text-xs text-slate-500 max-w-xs mx-auto leading-relaxed">You have completed all 20 tasks. The loop unlocks exactly 4 hours after your last completion sequence.</p>
                     
                     <div class="bg-white border border-slate-200 rounded-xl p-4 mt-2 max-w-xs mx-auto shadow-inner">
-                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest block">Next Tasks Unlock In</span>
-                        <div id="rollover-countdown-clock" class="text-2xl font-black text-rose-500 font-mono mt-1 tracking-widest">06:00:00</div>
+                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest block">Unlocks In</span>
+                        <div id="rollover-countdown-clock" class="text-2xl font-black text-rose-500 font-mono mt-1 tracking-widest">04:00:00</div>
                     </div>
                 </div>
 
-                <div class="w-full bg-slate-900 text-white rounded-2xl p-5 text-center space-y-3 shadow-md border border-slate-800 mt-4">
-                    <div class="flex justify-center items-center space-x-1.5">
-                        <span class="text-xs">📢</span>
-                        <h4 class="text-[11px] font-black uppercase tracking-wider text-indigo-400">Official System Broadcast</h4>
+                <div id="promo-code-panel" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 shadow-sm space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                        <h4 class="font-black text-xs text-slate-700 uppercase tracking-wider flex items-center">🎟️ VIP Promoter Allocation</h4>
+                        <span id="promo-status-badge" class="text-[8px] bg-amber-100 text-amber-700 font-black px-1.5 py-0.5 rounded uppercase">Locked</span>
                     </div>
-                    <p class="text-[11px] text-slate-300 font-medium max-w-xs mx-auto leading-relaxed">
-                        To get daily updates about payouts and optimizations, join our Telegram Community Channel below:
-                    </p>
-                    <div class="pt-1">
-                        <button onclick="window.Telegram && window.Telegram.WebApp ? Telegram.WebApp.openLink('https://t.me/+yQp-kyrACPJhOTg1') : window.open('https://t.me/+yQp-kyrACPJhOTg1', '_blank')" class="w-full bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-600 hover:to-violet-700 text-white font-black text-xs py-3 rounded-xl uppercase tracking-widest shadow-md active:scale-[0.98] transition-all cursor-pointer">
-                            🚀 JOIN CHANNEL
-                        </button>
+                    <div id="promo-content-box" class="opacity-50 pointer-events-none space-y-2">
+                        <p class="text-[10px] text-slate-500 font-medium">Complete all 20 tasks to input the promoter secret string for an instant +500 point bonus (First 100 users only).</p>
+                        <div class="flex space-x-2">
+                            <input type="text" id="input-promo-string" placeholder="ENTER CODE" class="flex-1 bg-white border border-slate-200 uppercase text-center font-bold tracking-widest rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-indigo-500">
+                            <button onclick="submitPromoterCode()" class="bg-slate-900 text-white font-black text-xs px-4 py-2 rounded-xl uppercase tracking-wider hover:bg-slate-800 transition-all">Apply</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -169,7 +138,7 @@
                     </div>
                     <div class="text-right text-[10px] text-slate-400 font-medium">
                         <span class="block font-bold text-slate-600">Exchange Standard:</span>
-                        <span>600 Pts = ₹1</span>
+                        <span>350 Pts = ₹1</span>
                     </div>
                 </div>
 
@@ -179,76 +148,43 @@
                 </div>
 
                 <div id="form-channel-upi" class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3.5 shadow-sm">
-                    <div class="border-b border-slate-200 pb-2"><h4 class="font-black text-xs text-slate-700 uppercase tracking-wider">UPI Transfer details</h4></div>
-                    <div class="space-y-2.5">
-                        <input type="text" id="upi-input-name" placeholder="Enter Full Name" class="w-full bg-white border border-slate-200 focus:border-indigo-500 focus:outline-none rounded-xl px-3 py-2.5 text-xs transition-all">
-                        <input type="text" id="upi-input-address" placeholder="username@bank" class="w-full bg-white border border-slate-200 focus:border-indigo-500 focus:outline-none rounded-xl px-3 py-2.5 text-xs transition-all">
-                        
-                        <div class="bg-white border border-slate-200/80 rounded-xl p-3 space-y-2.5">
-                            <span class="text-[10px] font-black uppercase text-slate-400 tracking-wider block">Quick Denomination Selection</span>
-                            <div class="grid grid-cols-3 gap-2">
-                                <label class="border border-slate-200 rounded-lg p-2.5 flex items-center justify-center space-x-2 bg-slate-50/50 cursor-pointer hover:bg-slate-100/70 transition-all">
-                                    <input type="checkbox" class="upi-chk w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" value="10" onclick="handleWalletCheckboxSelection(this, 'UPI')">
-                                    <span class="text-xs font-bold text-slate-700">₹10</span>
-                                </label>
-                                <label class="border border-slate-200 rounded-lg p-2.5 flex items-center justify-center space-x-2 bg-slate-50/50 cursor-pointer hover:bg-slate-100/70 transition-all">
-                                    <input type="checkbox" class="upi-chk w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" value="20" onclick="handleWalletCheckboxSelection(this, 'UPI')">
-                                    <span class="text-xs font-bold text-slate-700">₹20</span>
-                                </label>
-                                <label class="border border-slate-200 rounded-lg p-2.5 flex items-center justify-center space-x-2 bg-slate-50/50 cursor-pointer hover:bg-slate-100/70 transition-all">
-                                    <input type="checkbox" class="upi-chk w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" value="30" onclick="handleWalletCheckboxSelection(this, 'UPI')">
-                                    <span class="text-xs font-bold text-slate-700">₹30</span>
-                                </label>
-                            </div>
-                            <p id="upi-deduction-calculator-text" class="text-[10px] text-slate-400 font-semibold italic text-center pt-0.5">Select a box above to preview required point balance deduction.</p>
+                    <input type="text" id="upi-input-name" placeholder="Enter Full Name" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:outline-none">
+                    <input type="text" id="upi-input-address" placeholder="username@bank" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:outline-none">
+                    <div class="bg-white border border-slate-200 rounded-xl p-3 space-y-2.5">
+                        <div class="grid grid-cols-3 gap-2">
+                            <label class="border border-slate-200 rounded-lg p-2 flex items-center justify-center space-x-1 bg-slate-50 cursor-pointer"><input type="checkbox" class="upi-chk" value="10" onclick="handleWalletCheckboxSelection(this, 'UPI')"><span class="text-xs font-bold text-slate-700">₹10</span></label>
+                            <label class="border border-slate-200 rounded-lg p-2 flex items-center justify-center space-x-1 bg-slate-50 cursor-pointer"><input type="checkbox" class="upi-chk" value="20" onclick="handleWalletCheckboxSelection(this, 'UPI')"><span class="text-xs font-bold text-slate-700">₹20</span></label>
+                            <label class="border border-slate-200 rounded-lg p-2 flex items-center justify-center space-x-1 bg-slate-50 cursor-pointer"><input type="checkbox" class="upi-chk" value="30" onclick="handleWalletCheckboxSelection(this, 'UPI')"><span class="text-xs font-bold text-slate-700">₹30</span></label>
                         </div>
-
-                        <input type="number" id="upi-input-amount" readonly placeholder="Amount in ₹ (Auto-Selected)" class="w-full bg-slate-100/80 font-bold border border-slate-200 text-slate-600 rounded-xl px-3 py-2.5 text-xs focus:outline-none">
+                        <p id="upi-deduction-calculator-text" class="text-[10px] text-slate-400 font-semibold italic text-center pt-0.5">Select a box above.</p>
                     </div>
+                    <input type="number" id="upi-input-amount" readonly placeholder="Amount Auto-Selected" class="w-full bg-slate-100 border border-slate-200 text-slate-600 rounded-xl px-3 py-2.5 text-xs focus:outline-none">
                     <input type="hidden" id="upi-input-channel" value="UPI">
-                    <button onclick="dispatchWithdrawal('UPI')" class="w-full bg-gradient-to-r from-indigo-500 to-violet-600 text-white font-black text-xs py-3 rounded-xl uppercase tracking-wider active:scale-[0.99] transition-all cursor-pointer mt-1 shadow-sm">Withdraw to UPI</button>
+                    <button onclick="dispatchWithdrawal('UPI')" class="w-full bg-gradient-to-r from-indigo-500 to-violet-600 text-white font-black text-xs py-3 rounded-xl uppercase tracking-wider transition-all cursor-pointer">Withdraw to UPI</button>
                 </div>
 
                 <div id="form-channel-gift" class="hidden w-full bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3.5 shadow-sm">
-                    <div class="border-b border-slate-200 pb-2"><h4 class="font-black text-xs text-slate-700 uppercase tracking-wider">Google Play Redeem Code</h4></div>
-                    <div class="space-y-2.5">
-                        <input type="text" id="gift-input-name" placeholder="Enter Full Name" class="w-full bg-white border border-slate-200 focus:border-emerald-500 focus:outline-none rounded-xl px-3 py-2.5 text-xs transition-all">
-                        <input type="email" id="gift-input-address" placeholder="Enter Email Address" class="w-full bg-white border border-slate-200 focus:border-emerald-500 focus:outline-none rounded-xl px-3 py-2.5 text-xs transition-all">
-                        
-                        <div class="bg-white border border-slate-200/80 rounded-xl p-3 space-y-2.5">
-                            <span class="text-[10px] font-black uppercase text-slate-400 tracking-wider block">Quick Denomination Selection</span>
-                            <div class="grid grid-cols-3 gap-2">
-                                <label class="border border-slate-200 rounded-lg p-2.5 flex items-center justify-center space-x-2 bg-slate-50/50 cursor-pointer hover:bg-slate-100/70 transition-all">
-                                    <input type="checkbox" class="gift-chk w-4 h-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500" value="10" onclick="handleWalletCheckboxSelection(this, 'GIFT')">
-                                    <span class="text-xs font-bold text-slate-700">₹10</span>
-                                </label>
-                                <label class="border border-slate-200 rounded-lg p-2.5 flex items-center justify-center space-x-2 bg-slate-50/50 cursor-pointer hover:bg-slate-100/70 transition-all">
-                                    <input type="checkbox" class="gift-chk w-4 h-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500" value="20" onclick="handleWalletCheckboxSelection(this, 'GIFT')">
-                                    <span class="text-xs font-bold text-slate-700">₹20</span>
-                                </label>
-                                <label class="border border-slate-200 rounded-lg p-2.5 flex items-center justify-center space-x-2 bg-slate-50/50 cursor-pointer hover:bg-slate-100/70 transition-all">
-                                    <input type="checkbox" class="gift-chk w-4 h-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500" value="30" onclick="handleWalletCheckboxSelection(this, 'GIFT')">
-                                    <span class="text-xs font-bold text-slate-700">₹30</span>
-                                </label>
-                            </div>
-                            <p id="gift-deduction-calculator-text" class="text-[10px] text-slate-400 font-semibold italic text-center pt-0.5">Select a box above to preview required point balance deduction.</p>
+                    <input type="text" id="gift-input-name" placeholder="Enter Full Name" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:outline-none">
+                    <input type="email" id="gift-input-address" placeholder="Enter Email Address" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:outline-none">
+                    <div class="bg-white border border-slate-200 rounded-xl p-3 space-y-2.5">
+                        <div class="grid grid-cols-3 gap-2">
+                            <label class="border border-slate-200 rounded-lg p-2 flex items-center justify-center space-x-1 bg-slate-50 cursor-pointer"><input type="checkbox" class="gift-chk" value="10" onclick="handleWalletCheckboxSelection(this, 'GIFT')"><span class="text-xs font-bold text-slate-700">₹10</span></label>
+                            <label class="border border-slate-200 rounded-lg p-2 flex items-center justify-center space-x-1 bg-slate-50 cursor-pointer"><input type="checkbox" class="gift-chk" value="20" onclick="handleWalletCheckboxSelection(this, 'GIFT')"><span class="text-xs font-bold text-slate-700">₹20</span></label>
+                            <label class="border border-slate-200 rounded-lg p-2 flex items-center justify-center space-x-1 bg-slate-50 cursor-pointer"><input type="checkbox" class="gift-chk" value="30" onclick="handleWalletCheckboxSelection(this, 'GIFT')"><span class="text-xs font-bold text-slate-700">₹30</span></label>
                         </div>
-
-                        <input type="number" id="gift-input-amount" readonly placeholder="Card Amount (Auto-Selected)" class="w-full bg-slate-100/80 font-bold border border-slate-200 text-slate-600 rounded-xl px-3 py-2.5 text-xs focus:outline-none">
+                        <p id="gift-deduction-calculator-text" class="text-[10px] text-slate-400 font-semibold italic text-center pt-0.5">Select a box above.</p>
                     </div>
+                    <input type="number" id="gift-input-amount" readonly placeholder="Card Amount Auto-Selected" class="w-full bg-slate-100 border border-slate-200 text-slate-600 rounded-xl px-3 py-2.5 text-xs focus:outline-none">
                     <input type="hidden" id="gift-input-channel" value="GIFT">
-                    <button onclick="dispatchWithdrawal('GIFT')" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-black text-xs py-3 rounded-xl uppercase tracking-wider active:scale-[0.99] transition-all cursor-pointer mt-1 shadow-sm">Request Gift Card</button>
+                    <button onclick="dispatchWithdrawal('GIFT')" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-black text-xs py-3 rounded-xl uppercase tracking-wider transition-all cursor-pointer">Request Gift Card</button>
                 </div>
 
                 <div class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-3 shadow-sm mb-4">
                     <div class="flex items-center justify-between border-b border-slate-200 pb-2">
-                        <h4 class="font-black text-xs text-slate-700 uppercase tracking-wider flex items-center">
-                            <span class="mr-1.5 text-sm">📜</span> Recent Transaction Ledger
-                        </h4>
-                        <span class="text-[9px] bg-slate-200/70 font-bold text-slate-500 px-2 py-0.5 rounded uppercase">Real-Time Sync</span>
+                        <h4 class="font-black text-xs text-slate-700 uppercase tracking-wider flex items-center">📜 Recent Transaction Ledger</h4>
                     </div>
-                    <div id="transaction-history-scroll-box" class="space-y-2 max-h-[180px] overflow-y-auto pr-1">
-                        <div class="text-center py-4 text-slate-400 font-medium text-[10px] italic">Loading sync transaction arrays...</div>
+                    <div id="transaction-history-scroll-box" class="space-y-2 max-h-[180px] overflow-y-auto">
+                        <div class="text-center py-4 text-slate-400 text-[10px] italic">Syncing local system ledger records...</div>
                     </div>
                 </div>
             </div>
@@ -262,25 +198,19 @@
 
     <script>
         const BACKEND_ENDPOINT_CONDUIT = "https://tasknearn-backend.onrender.com";
-        const POINT_VALUE_DENOMINATOR = 600; 
+        const POINT_VALUE_DENOMINATOR = 350; 
 
-        let clientState = { points: 0, current_day: 1, daily_task_counter: 0, last_completion_date: null };
+        let clientState = { points: 0, current_day: 1, daily_task_counter: 0, last_completion_date: null, promo_claimed: false };
         let rolloverClockIntervalRef = null;
         let activeUserSession = { id: 123456789, username: "GuestUser" };
-
-        let trackingState = {
-            adClickTimestamp: 0,
-            activeVerificationToken: null,
-            isWaitingForClaim: false
-        };
+        
+        // State tracking parameters
+        let workflowState = { isWaitingForVerification: false, baselineTaskCounter: 0 };
 
         if (window.Telegram && window.Telegram.WebApp) {
             const tg = window.Telegram.WebApp;
-            tg.ready(); 
-            tg.expand();
-            if (tg.initDataUnsafe && tg.initDataUnsafe.user) { 
-                activeUserSession = tg.initDataUnsafe.user; 
-            }
+            tg.ready(); tg.expand();
+            if (tg.initDataUnsafe && tg.initDataUnsafe.user) { activeUserSession = tg.initDataUnsafe.user; }
         }
 
         if (activeUserSession && activeUserSession.username) {
@@ -291,10 +221,8 @@
         function switchScreen(viewKey) {
             const homeBtn = document.getElementById('nav-btn-home');
             const walletBtn = document.getElementById('nav-btn-wallet');
-            
             document.getElementById('screen-home').classList.add('hidden');
             document.getElementById('screen-wallet').classList.add('hidden');
-
             homeBtn.className = "flex flex-col items-center space-y-1 text-slate-400 font-medium transition-all";
             walletBtn.className = "flex flex-col items-center space-y-1 text-slate-400 font-medium transition-all";
 
@@ -311,47 +239,40 @@
         }
 
         function togglePayoutChannel(targetChannel) {
-            const upiTab = document.getElementById('tab-btn-upi');
-            const giftTab = document.getElementById('tab-btn-gift');
-            const upiForm = document.getElementById('form-channel-upi');
-            const giftForm = document.getElementById('form-channel-gift');
-            
             resetWalletInputsAndCheckboxes();
-
             if (targetChannel === 'UPI') {
-                upiTab.className = "py-2 text-xs font-black rounded-lg transition-all cursor-pointer bg-white text-indigo-600 shadow-sm";
-                giftTab.className = "py-2 text-xs font-black rounded-lg transition-all cursor-pointer text-slate-500 hover:text-slate-800";
-                upiForm.classList.remove('hidden');
-                giftForm.classList.add('hidden');
+                document.getElementById('tab-btn-upi').className = "py-2 text-xs font-black rounded-lg transition-all cursor-pointer bg-white text-indigo-600 shadow-sm";
+                document.getElementById('tab-btn-gift').className = "py-2 text-xs font-black rounded-lg transition-all cursor-pointer text-slate-500 hover:text-slate-800";
+                document.getElementById('form-channel-upi').classList.remove('hidden');
+                document.getElementById('form-channel-gift').classList.add('hidden');
             } else {
-                giftTab.className = "py-2 text-xs font-black rounded-lg transition-all cursor-pointer bg-white text-emerald-600 shadow-sm";
-                upiTab.className = "py-2 text-xs font-black rounded-lg transition-all cursor-pointer text-slate-500 hover:text-slate-800";
-                giftForm.classList.remove('hidden');
-                upiForm.classList.add('hidden');
+                document.getElementById('tab-btn-gift').className = "py-2 text-xs font-black rounded-lg transition-all cursor-pointer bg-white text-emerald-600 shadow-sm";
+                document.getElementById('tab-btn-upi').className = "py-2 text-xs font-black rounded-lg transition-all cursor-pointer text-slate-500 hover:text-slate-800";
+                document.getElementById('form-channel-gift').classList.remove('hidden');
+                document.getElementById('form-channel-upi').classList.add('hidden');
             }
         }
 
         function handleWalletCheckboxSelection(checkboxElement, targetChannelKey) {
-            const inputSelector = targetChannelKey === 'UPI' ? 'upi-input-amount' : 'gift-input-amount';
-            const textSelector = targetChannelKey === 'UPI' ? 'upi-deduction-calculator-text' : 'gift-deduction-calculator-text';
-            const cssTargetClass = targetChannelKey === 'UPI' ? '.upi-chk' : '.gift-chk';
+            const isUPI = targetChannelKey === 'UPI';
+            const inputSelector = isUPI ? 'upi-input-amount' : 'gift-input-amount';
+            const textSelector = isUPI ? 'upi-deduction-calculator-text' : 'gift-deduction-calculator-text';
+            const cssTargetClass = isUPI ? '.upi-chk' : '.gift-chk';
             
             const targetInputElement = document.getElementById(inputSelector);
             const targetTextElement = document.getElementById(textSelector);
 
             if (checkboxElement.checked) {
                 document.querySelectorAll(cssTargetClass).forEach(box => { if (box !== checkboxElement) box.checked = false; });
-                
                 const valRupees = parseInt(checkboxElement.value);
                 const computedPtsCost = valRupees * POINT_VALUE_DENOMINATOR;
-                
                 targetInputElement.value = valRupees;
-                targetTextElement.innerText = `🔥 ${computedPtsCost.toLocaleString('en-IN')} Points will be deducted from your account.`;
-                targetTextElement.className = "text-[10px] text-amber-600 font-bold tracking-wide text-center pt-0.5 animate-pulse";
+                targetTextElement.innerText = `🔥 ${computedPtsCost.toLocaleString('en-IN')} Points will be deducted.`;
+                targetTextElement.className = "text-[10px] text-amber-600 font-bold text-center pt-0.5 animate-pulse";
             } else {
                 targetInputElement.value = "";
-                targetTextElement.innerText = "Select a box above to preview required point balance deduction.";
-                targetTextElement.className = "text-[10px] text-slate-400 font-semibold italic text-center pt-0.5";
+                targetTextElement.innerText = "Select a box above.";
+                targetTextElement.className = "text-[10px] text-slate-400 font-semibold text-center pt-0.5";
             }
         }
 
@@ -359,10 +280,8 @@
             document.querySelectorAll('.upi-chk, .gift-chk').forEach(box => box.checked = false);
             document.getElementById('upi-input-amount').value = "";
             document.getElementById('gift-input-amount').value = "";
-            document.getElementById('upi-deduction-calculator-text').innerText = "Select a box above to preview required point balance deduction.";
-            document.getElementById('upi-deduction-calculator-text').className = "text-[10px] text-slate-400 font-semibold italic text-center pt-0.5";
-            document.getElementById('gift-deduction-calculator-text').innerText = "Select a box above to preview required point balance deduction.";
-            document.getElementById('gift-deduction-calculator-text').className = "text-[10px] text-slate-400 font-semibold italic text-center pt-0.5";
+            document.getElementById('upi-deduction-calculator-text').innerText = "Select a box above.";
+            document.getElementById('gift-deduction-calculator-text').innerText = "Select a box above.";
         }
 
         async function fetchAndRenderUserTransactionLedger() {
@@ -370,28 +289,23 @@
             try {
                 const res = await fetch(`${BACKEND_ENDPOINT_CONDUIT}/api/wallet/history?telegram_id=${activeUserSession.id}`);
                 const historyData = await res.json();
-
                 if (!res.ok || !historyData.history || historyData.history.length === 0) {
-                    targetHistoryBox.innerHTML = `<div class="text-center py-5 text-slate-400 text-[10px] font-medium italic">No ledger transaction points mapped to profile yet.</div>`;
+                    targetHistoryBox.innerHTML = `<div class="text-center py-5 text-slate-400 text-[10px] italic">No transaction history found.</div>`;
                     return;
                 }
-
                 targetHistoryBox.innerHTML = "";
                 historyData.history.forEach(tx => {
                     const parsedTime = new Date(tx.created_at).toLocaleDateString('en-IN', {day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit'});
                     const statusDotColor = tx.status === 'PENDING' ? 'bg-amber-400' : 'bg-emerald-500';
-                    
                     targetHistoryBox.innerHTML += `
                         <div class="w-full bg-white border border-slate-200 rounded-xl p-3 flex justify-between items-center text-xs shadow-2xs">
-                            <div class="space-y-0.5">
-                                <div class="flex items-center space-x-1.5">
-                                    <span class="font-bold text-slate-800">${tx.payment_channel === 'UPI' ? '⚡ UPI' : '🎮 Play Card'}</span>
-                                    <span class="text-[10px] text-slate-400 font-medium">₹${tx.amount_in_rupees}</span>
-                                </div>
+                            <div>
+                                <span class="font-bold text-slate-800">${tx.payment_channel === 'UPI' ? '⚡ UPI' : '🎮 Play Card'}</span>
+                                <span class="text-[10px] text-slate-400 font-medium ml-1">₹${tx.amount_in_rupees}</span>
                                 <span class="text-[9px] text-slate-400 block">${parsedTime}</span>
                             </div>
-                            <div class="text-right flex items-center space-x-2">
-                                <span class="font-black text-rose-500 text-[11px] font-mono">-${tx.points_deducted.toLocaleString('en-IN')} Pts</span>
+                            <div class="flex items-center space-x-2">
+                                <span class="font-black text-rose-500 text-[11px]">-${tx.points_deducted.toLocaleString('en-IN')} Pts</span>
                                 <div class="flex items-center space-x-1 border border-slate-100 rounded-md px-1.5 py-0.5 bg-slate-50">
                                     <span class="w-1.5 h-1.5 rounded-full ${statusDotColor}"></span>
                                     <span class="text-[8px] font-black tracking-wider text-slate-500">${tx.status}</span>
@@ -399,80 +313,63 @@
                             </div>
                         </div>`;
                 });
-            } catch (err) {
-                targetHistoryBox.innerHTML = `<div class="text-center py-5 text-rose-400 text-[10px] font-bold">Ledger profile connection drops.</div>`;
-            }
+            } catch (err) { targetHistoryBox.innerHTML = `<div class="text-center py-5 text-rose-400 text-[10px] font-bold">Failed to load ledger.</div>`; }
         }
 
         function getActiveTaskRewards(taskNumber) {
-            if (taskNumber <= 8) return { points: 100, tier: "Bronze", txt: "(1x Multiplier)" };
-            if (taskNumber <= 16) return { points: 125, tier: "Silver", txt: "(1.25x Multiplier)" };
-            if (taskNumber <= 24) return { points: 150, tier: "Gold", txt: "(1.5x Multiplier)" };
-            if (taskNumber <= 32) return { points: 175, tier: "Diamond", txt: "(1.75x Multiplier)" };
+            if (taskNumber <= 4)  return { points: 100, tier: "Bronze", txt: "(1x Multiplier)" };
+            if (taskNumber <= 8)  return { points: 125, tier: "Silver", txt: "(1.25x Multiplier)" };
+            if (taskNumber <= 12) return { points: 150, tier: "Gold", txt: "(1.5x Multiplier)" };
+            if (taskNumber <= 16) return { points: 175, tier: "Diamond", txt: "(1.75x Multiplier)" };
             return { points: 200, tier: "Kohinoor", txt: "(2x Multiplier)" };
         }
 
         function updateTierRoadmapVisuals(completedCount) {
-            const percentage = Math.min(Math.floor((completedCount / 40) * 100), 100);
+            const percentage = Math.min(Math.floor((completedCount / 20) * 100), 100);
             document.getElementById('tier-completion-percentage-tag').innerText = `${percentage}%`;
             document.getElementById('tier-progress-fill-bar').style.width = `${percentage}%`;
 
-            const node1 = document.getElementById('node-tier-1');
-            const node2 = document.getElementById('node-tier-2');
-            const node3 = document.getElementById('node-tier-3');
-            const node4 = document.getElementById('node-tier-4');
-            const node5 = document.getElementById('node-tier-5');
-            const node6 = document.getElementById('node-tier-6');
+            const nodes = ['node-tier-1', 'node-tier-2', 'node-tier-3', 'node-tier-4', 'node-tier-5', 'node-tier-6'];
+            const targets = [0, 4, 8, 12, 16, 20];
+            const borderColors = ['border-amber-500', 'border-slate-400', 'border-yellow-500', 'border-indigo-400', 'border-rose-400', 'border-emerald-500'];
 
-            if (completedCount >= 0) { node1.classList.remove('grayscale'); node1.classList.add('border-amber-500', 'scale-110'); }
-            
-            if (completedCount >= 8) { node2.classList.remove('grayscale'); node2.classList.add('border-slate-400', 'scale-110'); } 
-            else { node2.classList.add('grayscale'); node2.className = node2.className.replace(/border-\S+/g, ''); }
-
-            if (completedCount >= 16) { node3.classList.remove('grayscale'); node3.classList.add('border-yellow-500', 'scale-110'); } 
-            else { node3.classList.add('grayscale'); node3.className = node3.className.replace(/border-\S+/g, ''); }
-
-            if (completedCount >= 24) { node4.classList.remove('grayscale'); node4.classList.add('border-indigo-400', 'scale-110'); } 
-            else { node4.classList.add('grayscale'); node4.className = node4.className.replace(/border-\S+/g, ''); }
-
-            if (completedCount >= 32) { node5.classList.remove('grayscale'); node5.classList.add('border-rose-400', 'scale-110'); } 
-            else { node5.classList.add('grayscale'); node5.className = node5.className.replace(/border-\S+/g, ''); }
-
-            if (completedCount >= 40) { node6.classList.remove('grayscale'); node6.classList.add('border-emerald-500', 'scale-110', 'animate-pulse'); } 
-            else { node6.classList.add('grayscale'); node6.className = node6.className.replace(/border-\S+/g, ''); }
+            nodes.forEach((id, i) => {
+                const nodeEl = document.getElementById(id);
+                if (completedCount >= targets[i]) {
+                    nodeEl.classList.remove('grayscale');
+                    nodeEl.classList.add(borderColors[i], 'scale-110');
+                    if(i === 5 && completedCount >= 20) nodeEl.classList.add('animate-pulse');
+                } else {
+                    nodeEl.classList.add('grayscale');
+                    nodeEl.className = nodeEl.className.replace(/border-\S+/g, '').replace('scale-110', '').replace('animate-pulse', '');
+                }
+            });
         }
 
-        function initiateRolling6HClock(completionTimestampMsStr) {
+        function initiateRolling4HClock(completionTimestampMsStr) {
             if (rolloverClockIntervalRef) clearInterval(rolloverClockIntervalRef);
-
             const lastCompletionMs = parseInt(completionTimestampMsStr);
-            const lockUnlockTargetMs = lastCompletionMs + (6 * 60 * 60 * 1000);
+            const lockUnlockTargetMs = lastCompletionMs + (4 * 60 * 60 * 1000);
 
             function updateClock() {
-                const nowMs = Date.now();
-                const diffMs = lockUnlockTargetMs - nowMs;
-
+                const diffMs = lockUnlockTargetMs - Date.now();
                 if (diffMs <= 0) {
                     clearInterval(rolloverClockIntervalRef);
                     initializeUserProfileData();
                     return;
                 }
-
                 const totalSecs = Math.floor(diffMs / 1000);
                 const hrs = Math.floor(totalSecs / 3600).toString().padStart(2, '0');
                 const mins = Math.floor((totalSecs % 3600) / 60).toString().padStart(2, '0');
                 const secs = (totalSecs % 60).toString().padStart(2, '0');
-
                 document.getElementById('rollover-countdown-clock').innerText = `${hrs}:${mins}:${secs}`;
             }
-
             updateClock();
             rolloverClockIntervalRef = setInterval(updateClock, 1000);
         }
 
         function synchronizeInterfaceDisplay() {
             document.getElementById('display-points').innerText = clientState.points.toLocaleString('en-IN');
-            
             const weekIdx = Math.floor((clientState.current_day - 1) / 7) + 1;
             document.getElementById('label-current-week').innerText = `Week ${weekIdx} Progression`;
             document.getElementById('streak-counter-tag').innerText = `Day ${((clientState.current_day - 1) % 7) + 1} / 7`;
@@ -481,29 +378,41 @@
             gridContainer.innerHTML = "";
             for (let d = 1; d <= 7; d++) {
                 const mapVal = ((weekIdx - 1) * 7) + d;
-                if (mapVal < clientState.current_day) {
-                    gridContainer.innerHTML += `<div class="aspect-square border border-emerald-200 bg-emerald-50 rounded-lg flex items-center justify-center text-emerald-600 text-xs">✅</div>`;
-                } else if (mapVal === clientState.current_day) {
-                    gridContainer.innerHTML += `<div class="aspect-square border-2 border-indigo-500 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-600 text-xs animate-pulse">🔥</div>`;
-                } else {
-                    gridContainer.innerHTML += `<div class="aspect-square border border-slate-200 bg-white rounded-lg flex items-center justify-center text-slate-400 text-xs font-bold">${d}</div>`;
-                }
+                if (mapVal < clientState.current_day) gridContainer.innerHTML += `<div class="aspect-square border border-emerald-200 bg-emerald-50 rounded-lg flex items-center justify-center text-emerald-600 text-xs">✅</div>`;
+                else if (mapVal === clientState.current_day) gridContainer.innerHTML += `<div class="aspect-square border-2 border-indigo-500 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-600 text-xs animate-pulse">🔥</div>`;
+                else gridContainer.innerHTML += `<div class="aspect-square border border-slate-200 bg-white rounded-lg flex items-center justify-center text-slate-400 text-xs font-bold">${d}</div>`;
             }
 
             updateTierRoadmapVisuals(clientState.daily_task_counter);
 
             let isLocked = false;
             if (clientState.last_completion_date) {
-                const completionMs = parseInt(clientState.last_completion_date);
-                if ((Date.now() - completionMs) < (6 * 60 * 60 * 1000)) {
-                    isLocked = true;
+                if ((Date.now() - parseInt(clientState.last_completion_date)) < (4 * 60 * 60 * 1000)) isLocked = true;
+            }
+
+            const promoPanelContent = document.getElementById('promo-content-box');
+            const promoStatus = document.getElementById('promo-status-badge');
+            
+            if (clientState.daily_task_counter >= 20) {
+                promoPanelContent.classList.remove('opacity-50', 'pointer-events-none');
+                if (clientState.promo_claimed) {
+                    promoStatus.innerText = "Claimed";
+                    promoStatus.className = "text-[8px] bg-emerald-100 text-emerald-700 font-black px-1.5 py-0.5 rounded uppercase";
+                    promoPanelContent.classList.add('opacity-40', 'pointer-events-none');
+                } else {
+                    promoStatus.innerText = "Unlocked";
+                    promoStatus.className = "text-[8px] bg-emerald-500 text-white font-black px-1.5 py-0.5 rounded uppercase animate-bounce";
                 }
+            } else {
+                promoStatus.innerText = "Locked";
+                promoStatus.className = "text-[8px] bg-amber-100 text-amber-700 font-black px-1.5 py-0.5 rounded uppercase";
+                promoPanelContent.classList.add('opacity-50', 'pointer-events-none');
             }
 
             if (isLocked) {
                 document.getElementById('active-task-container-card').classList.add('hidden');
                 document.getElementById('all-tasks-completed-wall').classList.remove('hidden');
-                initiateRolling6HClock(clientState.last_completion_date);
+                initiateRolling4HClock(clientState.last_completion_date);
             } else {
                 document.getElementById('active-task-container-card').classList.remove('hidden');
                 document.getElementById('all-tasks-completed-wall').classList.add('hidden');
@@ -512,179 +421,150 @@
                 const nextIdx = clientState.daily_task_counter + 1;
                 const rewards = getActiveTaskRewards(nextIdx);
                 
-                document.getElementById('active-task-idx-badge').innerText = `${rewards.tier.toUpperCase()} RANK • TASK ${nextIdx}/40`;
-                
-                // Clean Simplified Task Labels without internal system naming bloat
+                document.getElementById('active-task-idx-badge').innerText = `${rewards.tier.toUpperCase()} RANK • TASK ${nextIdx}/20`;
                 document.getElementById('active-task-network-label').innerText = `TASK ${nextIdx}`;
-
                 document.getElementById('active-task-points-value').innerText = `+${rewards.points} Pts`;
                 document.getElementById('active-task-multiplier').innerText = rewards.txt;
-                document.getElementById('daily-fraction-counter').innerText = `${clientState.daily_task_counter} / 40 TASKS COMPLETED`;
+                document.getElementById('daily-fraction-counter').innerText = `${clientState.daily_task_counter} / 20 TASKS COMPLETED`;
 
-                if (!trackingState.isWaitingForClaim) {
+                if (!workflowState.isWaitingForVerification) {
                     const adBtn = document.getElementById('btn-claim-ads');
                     adBtn.innerText = "CLAIM POINTS";
-                    adBtn.className = "w-full bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-600 hover:to-violet-700 text-white font-black text-xs py-3.5 rounded-xl uppercase tracking-wider shadow-md transition-all active:scale-[0.98] cursor-pointer block";
+                    adBtn.className = "w-full bg-gradient-to-r from-indigo-500 to-violet-600 text-white font-black text-xs py-3.5 rounded-xl uppercase tracking-wider shadow-md transition-all active:scale-[0.98] cursor-pointer block";
                 }
             }
         }
 
-        async function fireBackendHandshake(verificationToken) {
-            try {
-                const handshakeRes = await fetch(`${BACKEND_ENDPOINT_CONDUIT}/api/tasks/verify-handshake`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ telegram_id: activeUserSession.id, token: verificationToken })
-                });
-                const handshakeData = await handshakeRes.json();
-                
-                if (handshakeRes.ok) {
-                    alert(`🏆 Success! Task verified and credited +${handshakeData.added_points} Pts!`);
-                    trackingState.isWaitingForClaim = false;
-                    trackingState.activeVerificationToken = null;
-                    triggerSecondaryPreloadCooldown(10); 
-                } else {
-                    alert(handshakeData.error || "Handshake synchronization fault.");
-                    resetSyncButtonState();
-                }
-            } catch (err) {
-                alert("Synchronization dropped. Please verify connection profile.");
-                resetSyncButtonState();
+        // CONTROL DISTRIBUTION ROUTER
+        function executeTaskActionPipeline() {
+            if (workflowState.isWaitingForVerification) {
+                syncProfileAndVerifyPostbackState();
+            } else {
+                fireNativeProgrammaticAd();
             }
-        }
-
-        function resetSyncButtonState() {
-            trackingState.isWaitingForClaim = false;
-            trackingState.activeVerificationToken = null;
-            const adBtn = document.getElementById('btn-claim-ads');
-            adBtn.disabled = false;
-            adBtn.innerText = "CLAIM POINTS";
-            adBtn.className = "w-full bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-600 hover:to-violet-700 text-white font-black text-xs py-3.5 rounded-xl uppercase tracking-wider shadow-md transition-all active:scale-[0.98] cursor-pointer block";
         }
 
         async function fireNativeProgrammaticAd() {
             const adBtn = document.getElementById('btn-claim-ads');
-
-            if (trackingState.isWaitingForClaim) {
-                const elasticSecondsPassed = Math.floor((Date.now() - trackingState.adClickTimestamp) / 1000);
-                const minimumRequiredTime = 10; 
-                
-                // Dynamic Exploit Protection Countdown Patch
-                if (elasticSecondsPassed < minimumRequiredTime) {
-                    let dynamicWaitRemainder = minimumRequiredTime - elasticSecondsPassed;
-                    alert(`Wait in the website for more ${dynamicWaitRemainder} seconds to earn points.`);
-                    return;
-                }
-
-                adBtn.disabled = true;
-                adBtn.innerText = "VERIFYING SECURE PACKET TRANSACTION...";
-                await fireBackendHandshake(trackingState.activeVerificationToken);
-                return;
-            }
-
-            adBtn.disabled = true;
-            adBtn.innerText = "INITIALIZING CORE DATA ENGINE...";
-
+            adBtn.disabled = true; adBtn.innerText = "INITIALIZING CORE DATA...";
+            
             try {
                 const res = await fetch(`${BACKEND_ENDPOINT_CONDUIT}/api/tasks/request-proxy`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ telegram_id: activeUserSession.id })
                 });
-                const payload = await res.json();
-                
-                if (!res.ok) {
-                    alert(payload.error);
-                    resetSyncButtonState();
-                    return;
+                if (!res.ok) { const payload = await res.json(); alert(payload.error); resetSyncButtonState(); return; }
+
+                workflowState.isWaitingForVerification = true;
+                workflowState.baselineTaskCounter = clientState.daily_task_counter;
+
+                const baseAdOptions = { 
+                    ymid: activeUserSession.id.toString(), 
+                    telegram_id: activeUserSession.id.toString(),
+                    type: 'pop' 
+                };
+
+                const currentIdx = clientState.daily_task_counter + 1;
+                const remainder4 = currentIdx % 4;
+
+                // PERFECT LOOP DISTRIBUTION SEGREGATION WITH FIXED 11157415 ID
+                if (remainder4 === 1) {
+                    if (typeof show_11147365 !== 'function') { alert("Engine Offline."); resetSyncButtonState(); return; }
+                    show_11147365(baseAdOptions).then(() => { prepareClaimNowState(); }).catch(() => { resetSyncButtonState(); });
+                } else if (remainder4 === 2) {
+                    if (typeof show_11157415 !== 'function') { alert("Engine Offline."); resetSyncButtonState(); return; }
+                    show_11157415(baseAdOptions).then(() => { prepareClaimNowState(); }).catch(() => { resetSyncButtonState(); });
+                } else if (remainder4 === 3) {
+                    if (typeof show_11192472 !== 'function') { alert("Engine Offline."); resetSyncButtonState(); return; }
+                    show_11192472(baseAdOptions).then(() => { prepareClaimNowState(); }).catch(() => { resetSyncButtonState(); });
+                } else if (remainder4 === 0) {
+                    if (typeof show_11192477 !== 'function') { alert("Engine Offline."); resetSyncButtonState(); return; }
+                    show_11192477(baseAdOptions).then(() => { prepareClaimNowState(); }).catch(() => { resetSyncButtonState(); });
                 }
-
-                trackingState.adClickTimestamp = Date.now();
-                trackingState.isWaitingForClaim = true;
-
-                const baseAdOptions = { ymid: activeUserSession.id.toString() };
-                const patternIndex8 = clientState.daily_task_counter % 8;
-
-                // Universal Parent Routing Core Engine Map
-                if (patternIndex8 === 0) {
-                    if (typeof show_11157414 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
-                    trackingState.activeVerificationToken = "MONETAG_RI64_HANDSHAKE";
-                    show_11157414({ type: 'end', ...baseAdOptions }).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
-
-                } else if (patternIndex8 === 1) {
-                    if (typeof show_11157414 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
-                    trackingState.activeVerificationToken = "MONETAG_RP65_HANDSHAKE";
-                    show_11157414({ type: 'pop', ...baseAdOptions }).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
-
-                } else if (patternIndex8 === 2) {
-                    if (typeof show_11147364 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
-                    trackingState.activeVerificationToken = "MONETAG_RI14_HANDSHAKE";
-                    show_11147364({ type: 'end', ...baseAdOptions }).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
-
-                } else if (patternIndex8 === 3) {
-                    if (typeof show_11147364 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
-                    trackingState.activeVerificationToken = "MONETAG_RP15_HANDSHAKE";
-                    show_11147364({ type: 'pop', ...baseAdOptions }).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
-
-                } else if (patternIndex8 === 4) {
-                    if (typeof show_11192471 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
-                    trackingState.activeVerificationToken = "MONETAG_RI71_HANDSHAKE";
-                    show_11192471({ type: 'end', ...baseAdOptions }).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
-
-                } else if (patternIndex8 === 5) {
-                    if (typeof show_11192471 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
-                    trackingState.activeVerificationToken = "MONETAG_RP72_HANDSHAKE";
-                    show_11192471({ type: 'pop', ...baseAdOptions }).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
-
-                } else if (patternIndex8 === 6) {
-                    if (typeof show_11192476 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
-                    trackingState.activeVerificationToken = "MONETAG_RI76_HANDSHAKE";
-                    show_11192476({ type: 'end', ...baseAdOptions }).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
-
-                } else if (patternIndex8 === 7) {
-                    if (typeof show_11192476 !== 'function') { alert("Core Engine Offline."); resetSyncButtonState(); return; }
-                    trackingState.activeVerificationToken = "MONETAG_RP77_HANDSHAKE";
-                    show_11192476({ type: 'pop', ...baseAdOptions }).then(() => { prepareClaimNowState(); }).catch((err) => { resetSyncButtonState(); });
-                }
-
-            } catch (err) {
-                console.warn("Backend connectivity sandbox error.");
-                resetSyncButtonState();
-            }
+            } catch (err) { resetSyncButtonState(); }
         }
 
         function prepareClaimNowState() {
             const adBtn = document.getElementById('btn-claim-ads');
-            adBtn.disabled = false;
-            adBtn.innerText = "CLAIM NOW";
-            adBtn.className = "w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-black text-xs py-3.5 rounded-xl uppercase tracking-wider shadow-md transition-all active:scale-[0.98] cursor-pointer block";
+            adBtn.disabled = false; adBtn.innerText = "CLAIM NOW";
+            adBtn.className = "w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-black text-xs py-3.5 rounded-xl uppercase tracking-wider shadow-md cursor-pointer block";
+        }
+
+        // STRICT LOGICAL VERIFICATION POLL METHOD
+        async function syncProfileAndVerifyPostbackState() {
+            const adBtn = document.getElementById('btn-claim-ads');
+            adBtn.disabled = true; adBtn.innerText = "VERIFYING CONVERSION...";
+
+            try {
+                const res = await fetch(`${BACKEND_ENDPOINT_CONDUIT}/api/profile/load?id=${activeUserSession.id}&username=${encodeURIComponent(activeUserSession.username || '')}`);
+                const data = await res.json();
+                
+                if (data && data.state) {
+                    // Check if server database task completion counter moved up
+                    if (data.state.daily_task_counter > workflowState.baselineTaskCounter) {
+                        clientState = data.state;
+                        alert("🏆 Monetag Confirmed Click! Points Credited successfully!");
+                        workflowState.isWaitingForVerification = false;
+                        triggerSecondaryPreloadCooldown(3);
+                    } else {
+                        alert("⚠️ Ad impression not yet processed by Monetag. Please interact with the popup/article and click again in a few seconds.");
+                        adBtn.disabled = false;
+                        adBtn.innerText = "CLAIM NOW";
+                    }
+                }
+            } catch (e) {
+                alert("Network verification drop. Try again.");
+                adBtn.disabled = false;
+                adBtn.innerText = "CLAIM NOW";
+            }
         }
 
         function triggerSecondaryPreloadCooldown(durationSeconds) {
             const adBtn = document.getElementById('btn-claim-ads');
             const noticeBlock = document.getElementById('cooldown-timer-notice');
             let timeRemaining = durationSeconds;
-
-            adBtn.classList.add('hidden');
-            noticeBlock.classList.remove('hidden');
+            adBtn.classList.add('hidden'); noticeBlock.classList.remove('hidden');
 
             const loopTimerRef = setInterval(() => {
-                noticeBlock.innerText = `⏳ Next operational task active in ${timeRemaining}s...`;
+                noticeBlock.innerText = `⏳ Loading next tracking zone payload in ${timeRemaining}s...`;
                 timeRemaining--;
-
                 if (timeRemaining < 0) {
                     clearInterval(loopTimerRef);
-                    noticeBlock.classList.add('hidden');
-                    adBtn.classList.remove('hidden');
-                    adBtn.disabled = false;
-                    initializeUserProfileData();
+                    noticeBlock.classList.add('hidden'); adBtn.classList.remove('hidden');
+                    adBtn.disabled = false; initializeUserProfileData();
                 }
             }, 1000);
         }
 
+        function resetSyncButtonState() {
+            workflowState.isWaitingForVerification = false;
+            const adBtn = document.getElementById('btn-claim-ads');
+            adBtn.disabled = false;
+            adBtn.innerText = "CLAIM POINTS";
+            adBtn.className = "w-full bg-gradient-to-r from-indigo-500 to-violet-600 text-white font-black text-xs py-3.5 rounded-xl uppercase tracking-wider shadow-md transition-all active:scale-[0.98] cursor-pointer block";
+        }
+
+        async function submitPromoterCode() {
+            const codeVal = document.getElementById('input-promo-string').value.trim();
+            if(!codeVal) { alert("Please input a valid sequence."); return; }
+
+            try {
+                const res = await fetch(`${BACKEND_ENDPOINT_CONDUIT}/api/promo/claim`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ telegram_id: activeUserSession.id, code: codeVal })
+                });
+                const data = await res.json();
+                if(!res.ok) { alert(data.error); return; }
+
+                alert(`🎉 Promo code accepted! Verified bonus +${data.bonus} Pts!`);
+                initializeUserProfileData();
+            } catch(e) { alert("Promo verification drop."); }
+        }
+
         async function dispatchWithdrawal(formIdKey) {
             let name, addr, amt, passChannel;
-            
             if (formIdKey === 'UPI') {
                 name = document.getElementById('upi-input-name').value.trim();
                 addr = document.getElementById('upi-input-address').value.trim();
@@ -697,33 +577,18 @@
                 passChannel = document.getElementById('gift-input-channel').value;
             }
 
-            if (!name || !addr || isNaN(amt) || amt <= 0) { 
-                alert("Please complete the payout forms and select a checkbox amount."); 
-                return; 
-            }
-            
+            if (!name || !addr || isNaN(amt) || amt <= 0) { alert("Please complete forms completely."); return; }
             try {
                 const res = await fetch(`${BACKEND_ENDPOINT_CONDUIT}/api/wallet/withdraw`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        telegram_id: activeUserSession.id,
-                        account_name: name,
-                        payment_channel: passChannel,
-                        destination_address: addr,
-                        amount_in_rupees: amt
-                    })
+                    body: JSON.stringify({ telegram_id: activeUserSession.id, account_name: name, payment_channel: passChannel, destination_address: addr, amount_in_rupees: amt })
                 });
                 const data = await res.json();
                 if (!res.ok) { alert(data.error); return; }
-
-                alert(`✅ Withdrawal logged successfully for ₹${amt}!`);
-                resetWalletInputsAndCheckboxes();
-                initializeUserProfileData();
-                fetchAndRenderUserTransactionLedger();
-            } catch (err) { 
-                alert("Transaction dispatch interrupted."); 
-            }
+                alert(`✅ Withdrawal logged for ₹${amt}!`);
+                resetWalletInputsAndCheckboxes(); initializeUserProfileData();
+            } catch (err) { alert("Dispatch error."); }
         }
 
         async function initializeUserProfileData() {
@@ -731,9 +596,7 @@
                 const res = await fetch(`${BACKEND_ENDPOINT_CONDUIT}/api/profile/load?id=${activeUserSession.id}&username=${encodeURIComponent(activeUserSession.username || '')}`);
                 const data = await res.json();
                 if (data && data.state) { clientState = data.state; }
-            } catch (e) { 
-                console.warn("Using fallback local instance profile configuration."); 
-            }
+            } catch (e) { console.warn("Network error during initialization."); }
             synchronizeInterfaceDisplay();
         }
 
